@@ -7,6 +7,9 @@
         <title>test</title>
     </head>
     <body>
-        <div>test</div>
+        <div id="app">
+            <hello-component></hello-component>
+        </div>
+        <script src="js/app.js"></script>
     </body>
 </html>

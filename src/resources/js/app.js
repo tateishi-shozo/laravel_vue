@@ -1,4 +1,13 @@
 import { createApp } from 'vue';
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const helloComponent = {
+        template: '<p>hello!</p>'
+}
+
+const app = Vue.createApp({
+    components: {
+    'hello-component': helloComponent
+    }
+})
+app.mount('#app')
