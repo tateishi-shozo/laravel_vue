@@ -3,13 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>test</title>
+        <title>Laravel</title>
+        
     </head>
     <body>
         <div id="app">
-            <hello-component></hello-component>
+            <test-vue></test-vue>
         </div>
-        <script src="js/app.js"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

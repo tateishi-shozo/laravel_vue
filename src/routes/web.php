@@ -16,5 +16,5 @@ Route::get('/home', function () {
 });
 
 Route::get('/index', function () {
-    return view('index');
+    return view('/index');
 });

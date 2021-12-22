@@ -1,13 +1,6 @@
-import { createApp } from 'vue';
-import App from './App.vue'
+import { createApp } from 'vue/dist/vue.esm-bundler.js'
+import TestVue from './components/TestVue.vue'
 
-const helloComponent = {
-        template: '<p>hello!</p>'
-}
-
-const app = Vue.createApp({
-    components: {
-    'hello-component': helloComponent
-    }
-})
-app.mount('#app')
+const app = createApp({})
+app.component('test-vue', TestVue);
+app.mount('#app');

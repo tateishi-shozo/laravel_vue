@@ -10,8 +10,8 @@
         "production": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "@vue/compiler-sfc": "^3.2.24",
-        "axios": "^0.19",
+        "@vue/compiler-sfc": "^3.2.26",
+        "axios": "^0.24.0",
         "cross-env": "^7.0.3",
         "laravel-mix": "^5.0.1",
         "laravel-mix-vue3": "^0.7.0",
