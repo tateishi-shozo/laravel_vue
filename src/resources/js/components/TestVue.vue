@@ -1,11 +1,15 @@
 <template>
-  test!!!!!!
+  <div>
+    <p>test!!!!!!</p>
+  </div>
 </template>
 <script>
 import { onMounted } from 'vue'
 export default ({
   setup() {
-    console.log("start vue")
+    data : () => ({
+      test: false
+    }),
 
     onMounted(() => {
       console.log('start mounted !')

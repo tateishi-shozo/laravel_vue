@@ -17470,8 +17470,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   setup() {
-    console.log("start vue");
-    Object(vue__WEBPACK_IMPORTED_MODULE_0__["onMounted"])(() => {
+    data: () => ({
+      test: false
+    }), Object(vue__WEBPACK_IMPORTED_MODULE_0__["onMounted"])(() => {
       console.log('start mounted !');
     });
   }
@@ -17490,8 +17491,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm-bundler.js");
+
+
+const _hoisted_1 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, "test!!!!!!", -1
+/* HOISTED */
+);
+
+const _hoisted_2 = [_hoisted_1];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return " test!!!!!! ";
+  return Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("div", null, _hoisted_2);
 }
 
 /***/ }),
