@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
-        
-    </head>
-    <body>
-        <div id="app">
-            <test-vue></test-vue>
-        </div>
-        <script src="{{ mix('js/app.js') }}"></script>
-    </body>
+ 
+<head>
+    <meta charset="UTF-8">
+    <title>SPAサンプル</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+ 
+<body>
+ 
+    <div id="app">
+        <book-component></book-component>
+    </div>
+ 
+    <script src="{{ mix('js/app.js') }}"></script>
+</body>
+ 
 </html>
