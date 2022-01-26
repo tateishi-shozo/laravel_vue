@@ -5455,95 +5455,12 @@ module.exports = {
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/dist??vue-loader-options!./resources/js/components/BookComponent.vue?vue&type=script&lang=js ***!
   \************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'test',
+var app = Vue.createApp({
   data: function data() {
-    return {
-      message: "",
-      isPush: false,
-      updateForm: false,
-      books: {},
-      title: "",
-      author: "",
-      updateId: "",
-      updateTitle: "",
-      updateAuthor: ""
-    };
-  },
-  created: function created() {
-    this.getBook();
-  },
-  methods: {
-    getBook: function getBook() {
-      var _this = this;
-
-      axios.get("/api/books/").then(function (response) {
-        _this.books = response.data;
-      })["catch"](function (err) {
-        _this.message = err;
-      });
-    },
-    addBook: function addBook() {
-      var _this2 = this;
-
-      axios.post("/api/books/", {
-        title: this.title,
-        author: this.author
-      }).then(function (response) {
-        _this2.getBook();
-
-        _this2.title = "";
-        _this2.author = "";
-        _this2.message = "";
-      })["catch"](function (err) {
-        _this2.message = err;
-      });
-    },
-    displayUpdate: function displayUpdate(id, title, author) {
-      this.isPush = true;
-      this.updateForm = true;
-      this.message = "";
-      this.updateId = id;
-      this.updateTitle = title;
-      this.updateAuthor = author;
-    },
-    updateCancel: function updateCancel() {
-      this.isPush = false;
-      this.updateForm = false;
-      this.message = "";
-    },
-    updateBook: function updateBook(updateId, updateTitle, updateAuthor) {
-      var _this3 = this;
-
-      axios.put("/api/books/" + updateId, {
-        title: this.updateTitle,
-        author: this.updateAuthor
-      }).then(function (response) {
-        _this3.getBook();
-
-        _this3.isPush = false;
-        _this3.updateForm = false;
-        _this3.message = "";
-      })["catch"](function (err) {
-        _this3.message = err;
-      });
-    },
-    deleteBook: function deleteBook(id) {
-      var _this4 = this;
-
-      axios["delete"]("/api/books/" + id).then(function (response) {
-        _this4.getBook();
-
-        _this4.message = "";
-      })["catch"](function (err) {
-        _this4.message = err;
-      });
-    }
+    return {};
   }
 });
 
@@ -21482,182 +21399,52 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c("p", [
-        _vm._v("タイトル："),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.title,
-              expression: "title",
-            },
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.title },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.title = $event.target.value
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("著者："),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.author,
-              expression: "author",
-            },
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.author },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.author = $event.target.value
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.addBook } }, [_vm._v("追加")]),
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c(
-        "ul",
-        _vm._l(_vm.books, function (book) {
-          return _c("li", { key: book.id }, [
-            _vm._v(
-              "\n                    " +
-                _vm._s(book.id) +
-                "/" +
-                _vm._s(book.title) +
-                "/" +
-                _vm._s(book.author) +
-                "\n                    "
-            ),
-            _c(
-              "button",
-              {
-                attrs: { disabled: _vm.isPush },
-                on: {
-                  click: function ($event) {
-                    return _vm.displayUpdate(book.id, book.title, book.author)
-                  },
-                },
-              },
-              [_vm._v("\n                        編集\n                    ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                attrs: { disabled: _vm.isPush },
-                on: {
-                  click: function ($event) {
-                    return _vm.deleteBook(book.id)
-                  },
-                },
-              },
-              [_vm._v("\n                        削除\n                    ")]
-            ),
-          ])
-        }),
-        0
-      ),
-    ]),
-    _vm._v(" "),
-    _vm.updateForm
-      ? _c("div", [
-          _c("p", [_vm._v("idが" + _vm._s(_vm.updateId) + "の編集フォーム")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("タイトル："),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.updateTitle,
-                  expression: "updateTitle",
-                },
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.updateTitle },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.updateTitle = $event.target.value
-                },
-              },
-            }),
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("著者："),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.updateAuthor,
-                  expression: "updateAuthor",
-                },
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.updateAuthor },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.updateAuthor = $event.target.value
-                },
-              },
-            }),
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              on: {
-                click: function ($event) {
-                  return _vm.updateBook(
-                    _vm.updateId,
-                    _vm.updateTitle,
-                    _vm.updateAuthor
-                  )
-                },
-              },
-            },
-            [_vm._v("\n                編集する\n            ")]
-          ),
-          _vm._v(" "),
-          _c("button", { on: { click: _vm.updateCancel } }, [
-            _vm._v("キャンセル"),
-          ]),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.message ? _c("p", [_vm._v(_vm._s(_vm.message))]) : _vm._e(),
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form" }, [
+      _c("p", [
+        _vm._v("タイトル"),
+        _c("input", { staticClass: "title", attrs: { type: "text" } }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "category" }, [
+        _c("p", [_vm._v("カテゴリー")]),
+        _vm._v(" "),
+        _c("p", [_c("input", { attrs: { type: "radio", value: "文芸" } })]),
+        _vm._v(" "),
+        _c("p", [_c("input", { attrs: { type: "radio", value: "実用書" } })]),
+        _vm._v(" "),
+        _c("p", [
+          _c("input", { attrs: { type: "radio", value: "ビジネス書" } }),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("input", { attrs: { type: "radio", value: "絵本・児童書" } }),
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("input", { attrs: { type: "radio", value: "学習参考書" } }),
+        ]),
+        _vm._v(" "),
+        _c("p", [_c("input", { attrs: { type: "radio", value: "専門書" } })]),
+        _vm._v(" "),
+        _c("p", [
+          _c("input", { attrs: { type: "radio", value: "コミック・雑誌" } }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("タイトルß"),
+        _c("input", { staticClass: "title", attrs: { type: "text" } }),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -54184,14 +53971,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!***************************************************!*\
   !*** ./resources/js/components/BookComponent.vue ***!
   \***************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BookComponent_vue_vue_type_template_id_d9c7ac8e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookComponent.vue?vue&type=template&id=d9c7ac8e */ "./resources/js/components/BookComponent.vue?vue&type=template&id=d9c7ac8e");
 /* harmony import */ var _BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookComponent.vue?vue&type=script&lang=js */ "./resources/js/components/BookComponent.vue?vue&type=script&lang=js");
-/* empty/unused harmony star reexport *//* harmony import */ var _var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 /* harmony import */ var _var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_var_www_html_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -54211,13 +53999,15 @@ if (false) {}
 /*!***************************************************************************!*\
   !*** ./resources/js/components/BookComponent.vue?vue&type=script&lang=js ***!
   \***************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_dist_index_js_vue_loader_options_BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/dist??vue-loader-options!./BookComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/dist/index.js?!./resources/js/components/BookComponent.vue?vue&type=script&lang=js");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_dist_index_js_vue_loader_options_BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_dist_index_js_vue_loader_options_BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_dist_index_js_vue_loader_options_BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_dist_index_js_vue_loader_options_BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_dist_index_js_vue_loader_options_BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_dist_index_js_vue_loader_options_BookComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

@@ -8,7 +8,7 @@
 </head>
  
 <body>
- 
+
     <div id="app">
         <book-component></book-component>
     </div>
