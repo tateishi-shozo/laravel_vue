@@ -1,23 +1,29 @@
 <template>
-    <div class="form">
-        <p>タイトル<input type="text" class="title"></p>
-        <div class="category"><p>カテゴリー</p>
-            <p><input type="radio" value="文芸"></p>
-            <p><input type="radio" value="実用書"></p>
-            <p><input type="radio" value="ビジネス書"></p>
-            <p><input type="radio" value="絵本・児童書"></p>
-            <p><input type="radio" value="学習参考書"></p>
-            <p><input type="radio" value="専門書"></p>
-            <p><input type="radio" value="コミック・雑誌"></p>
-        </div>
-        <p>タイトルß<input type="text" class="title"></p>
+    <div class="booklist">
+        <ul>
+            <li v-for="book in books">
+                {{ book.title }}/{{ book.category }}
+            </li>
+        </ul>
     </div>
-    
 </template>
 <script>
-const app = Vue.createApp({
-    data: () => ({
-
+export default {
+    data:() =>({
+        books: null
     }),
-})
+    mounted: function() {
+        this.getBook()
+    },
+    methods: {
+        getBook: function(){
+            let self = this
+            axios.get('api/books')
+            .then(function(response){
+                console.log(response)
+                self.books = response.data
+            })
+        }
+    },
+}
 </script>
