@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
-use App\Http\Requests\StoreBook;
 
 class BookController extends Controller
 {
@@ -24,7 +23,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBook $request)
+    public function store(Request $request)
     {
         Book::create($request->all());
     }
