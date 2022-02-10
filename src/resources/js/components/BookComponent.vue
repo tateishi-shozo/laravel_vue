@@ -1,5 +1,7 @@
 <template>
     <div>
+        <h2>MYライブラリー</h2>
+        {{ message }}
         <div class="form">
             <p>タイトル：<input type="text" v-model="title"></p>
             <p>カテゴリー：
@@ -12,11 +14,11 @@
             </p>
             <button @click="addBook">追加</button>
         </div>
-        <p v-if="message">{{ message }}</p>
         <div class="booklist">
             <ul>
                 <li v-for="book in books">
-                    {{ book.title }}/{{ book.category }}{{ book.evaluation }}{{ book.conclued }}
+                    {{ book.id }}:{{ book.title }}/{{ book.category }}{{ book.evaluation }}{{ book.conclued }}
+                    <button @click="deleteBook(book.id)">削除</button>
                 </li>
             </ul>
         </div>
@@ -29,34 +31,59 @@ export default {
         title: '',
         category: '',
         message: '',
-        books: null
+        books: []
         }
     },
     mounted: function() {
         this.getBook()
     },
     methods: {
-        getBook: function(){
+        //登録した本の一覧表示
+        getBook(){
             console.log("マウント")
-            let self = this
+            const vm = this
             axios.get('api/books')
             .then(function(response){
-                self.books = response.data
+                vm.books = response.data
             })
         },
-        addBook: function(event) {
+
+        //本の新規登録
+        addBook(event) {
+            if( this.title == "" || this.category == ""){
+                this.message = "全て入力してください!!"
+                return
+            }
             console.log("クリック")
             axios.post('api/books',{
                 title: this.title,
                 category: this.category,
                 read_flg: 0
             })
-            .then(function(){
+            .then(()=>{
                 console.log("更新")
-                this.getBook();
+                let newbook = {
+                    title: this.title,
+                    category: this.category
+                }
+                this.books.push(newbook)
+
                 this.title = '',
-                this.category = ''
+                this.category = '',
+                this.message = ''
             })
+        },
+
+        //登録した本の削除
+        deleteBook(id) {
+            const index = this.books.findIndex((book) => book.id === id )
+            console.log(index)
+
+            axios.delete('api/books/' + id)
+            .then(
+                this.books.splice(index,1),
+                this.message = "削除しました!!"
+            )
         }
     },
 }
