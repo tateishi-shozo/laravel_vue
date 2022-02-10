@@ -56,6 +56,7 @@ class BookController extends Controller
             'conclude' => $request->conclude,
             'image' => $request->image
         ];
+        
         Book::where('id',$id)->update($update);
     }
 
