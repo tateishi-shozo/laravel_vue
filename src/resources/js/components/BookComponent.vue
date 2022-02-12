@@ -63,10 +63,10 @@ export default {
         //登録した本の一覧表示
         getBook(){
             console.log("マウント")
-            const vm = this
+            //const vm = this
             axios.get('api/books')
             .then((response) => {
-                vm.books = response.data
+                this.books = response.data
             })
         },
 
