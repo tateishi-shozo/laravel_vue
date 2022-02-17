@@ -18,13 +18,12 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/index');
         $response->assertStatus(200);
-
     }
 
-    //@indexテスト
+    //index()テスト
     public function testApiIndex(){
         $this->get('api/books')
-        ->assertStatus(200)
+        ->assertOk()
         ->assertJsonStructure([
             "*" =>[
                 'id',
@@ -32,7 +31,18 @@ class ExampleTest extends TestCase
                 'category',
                 'read_flg',
             ]
-
         ]);
+    }
+
+    //store()テスト
+    public function testApiStore(){
+        $data = [
+                'title' => 'テスト用',
+                'category' => '文芸',
+                'read_flg' => 0
+            ];
+        
+        $this->post('api/books',$data)
+        ->assertOk();
     }
 }
