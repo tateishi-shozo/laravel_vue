@@ -11,7 +11,7 @@ class TestBooksSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Test_books')->insert([
+        DB::table('books')->insert([
             'title' => 'テスト用',
             'category' => '文芸',
             'read_flg' => 0 

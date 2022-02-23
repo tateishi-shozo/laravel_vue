@@ -16,6 +16,16 @@ class ExampleTest extends TestCase
     //viewのテスト
     public function testBasicTest()
     {
+        // $a = factory(\App\Book::class)->create();
+        // Log::debug($a);
+
+        // $data = [
+        //     'id' => 1,
+        //     'title' => 'テスト用'
+        // ];
+        
+        // $this->assertDatabaseHas('books',$data);
+        
         $response = $this->get('/index');
         $response->assertStatus(200);
     }
@@ -37,7 +47,7 @@ class ExampleTest extends TestCase
     //store()テスト
     public function testApiStore(){
         $data = [
-                'title' => 'テスト用',
+                'title' => 'store()テスト',
                 'category' => '文芸',
                 'read_flg' => 0
             ];
