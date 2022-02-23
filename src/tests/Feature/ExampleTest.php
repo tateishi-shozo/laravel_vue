@@ -26,6 +26,10 @@ class ExampleTest extends TestCase
         
         // $this->assertDatabaseHas('books',$data);
         
+        //dd(env('APP_ENV'));
+        //dd(env('DB_CONNECTION'));
+        //dd(env('DB_DATABASE'));
+        
         $response = $this->get('/index');
         $response->assertStatus(200);
     }
