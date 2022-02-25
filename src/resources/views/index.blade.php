@@ -8,11 +8,9 @@
 </head>
  
 <body>
-
-    <div id="app">
+    <div class="bg-light" id="app">
         <book-component></book-component>
     </div>
- 
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
  

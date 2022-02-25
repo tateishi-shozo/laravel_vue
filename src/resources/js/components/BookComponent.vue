@@ -1,23 +1,28 @@
 <template>
-    <div>
-        <h2>MYライブラリー</h2>
-        {{ message }}
-        <h3>新規登録</h3>
-        <div class="form">
-            <p>タイトル：<input type="text" v-model="title"></p>
-            <p>カテゴリー：
-                <input type="radio" name="category" value="文芸" v-model="category">文芸
-                <input type="radio" name="category" value="実用書" v-model="category">実用書
-                <input type="radio" name="category" value="ビジネス書" v-model="category">ビジネス書
-                <input type="radio" name="category" value="絵本/児童書" v-model="category">絵本/児童書
-                <input type="radio" name="category" value="学習参考書/専門書" v-model="category">学習参考書/専門書
-                <input type="radio" name="category" value="コミック/雑誌" v-model="category">コミック/雑誌
-            </p>
-            <button @click="addBook">追加</button>
+    <div class="bg-light">
+        <div class="navbar navbar-light navbar-dark bg-dark">
+            <h2 class="navbar-brand">MYライブラリー</h2>
         </div>
-
+        <div>
+            <div>
+                <h3>新規登録</h3>
+                {{ message }}
+            </div>
+            <div>
+                <p>タイトル：<input type="text" v-model="title"></p>
+                <p>カテゴリー：
+                    <input type="radio" name="category" value="文芸" v-model="category">文芸
+                    <input type="radio" name="category" value="実用書" v-model="category">実用書
+                    <input type="radio" name="category" value="ビジネス書" v-model="category">ビジネス書
+                    <input type="radio" name="category" value="絵本/児童書" v-model="category">絵本/児童書
+                    <input type="radio" name="category" value="学習参考書/専門書" v-model="category">学習参考書/専門書
+                    <input type="radio" name="category" value="コミック/雑誌" v-model="category">コミック/雑誌
+                </p>
+                <button class="btn btn-primary" @click="addBook">追加</button>
+            </div>
+        </div>
         <div class="edit_form" v-if="editFlg">
-        <h3>編集フォーム</h3>
+            <h3>編集フォーム</h3>
             <p>タイトル：<input type="text" v-model="updateTitle"></p>
             <p>カテゴリー：
                 <input type="radio" name="category" value="文芸" v-model="updateCategory">文芸
@@ -27,17 +32,36 @@
                 <input type="radio" name="category" value="学習参考書/専門書" v-model="updateCategory">学習参考書/専門書
                 <input type="radio" name="category" value="コミック/雑誌" v-model="updateCategory">コミック/雑誌
             </p>
-            <button @click="updateBook(updateId)">変更</button>
-            <button @click="updateCancel">キャンセル</button>
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <button @click="updateBook(updateId)" class="btn btn-primary">変更</button>
+                    <button @click="updateCancel" class="btn btn-secondary">キャンセル</button>
+                </div>
+            </div>
         </div>        
-        <div class="booklist">
-            <ul>
-                <li v-for="book in books">
-                    {{ book.title }}/{{ book.category }}{{ book.evaluation }}{{ book.conclued }}
-                    <button @click="updateForm(book.id,book.title,book.category)">編集</button>
-                    <button @click="deleteBook(book.id)">削除</button>
-                </li>
-            </ul>
+        <div class="bg-light">
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">タイトル</th>
+                <th scope="col">カテゴリー</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="book in books">
+                <td>{{ book.title }}</td>
+                <td>{{ book.category }}</td>
+                <td>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary">編集</button>
+                            <button @click="deleteBook(book.id)" class="btn btn-danger">削除</button>
+                        </div>
+                    </div>
+                </td>
+                </tr>
+            </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -56,9 +80,11 @@ export default {
             books: []
         }
     },
+
     mounted: function() {
         this.getBook()
     },
+
     methods: {
         //登録した本の一覧表示
         getBook(){

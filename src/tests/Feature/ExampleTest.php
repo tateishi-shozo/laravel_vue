@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Book;
 
 class ExampleTest extends TestCase
 {
@@ -13,23 +15,17 @@ class ExampleTest extends TestCase
      * @return void
      */
 
+    //use RefreshDatabase;
+
     //viewのテスト
     public function testBasicTest()
-    {
-        // $a = factory(\App\Book::class)->create();
-        // Log::debug($a);
+    {   
+        // for($i = 0;$i < 10 ; $i++)
+        // {
+        //     factory(\App\Book::class)->create();
+    
+        // };
 
-        // $data = [
-        //     'id' => 1,
-        //     'title' => 'テスト用'
-        // ];
-        
-        // $this->assertDatabaseHas('books',$data);
-        
-        //dd(env('APP_ENV'));
-        //dd(env('DB_CONNECTION'));
-        //dd(env('DB_DATABASE'));
-        
         $response = $this->get('/index');
         $response->assertStatus(200);
     }
@@ -59,4 +55,54 @@ class ExampleTest extends TestCase
         $this->post('api/books',$data)
         ->assertOk();
     }
+
+    //destroy()テスト
+    public function testApiDestroy()
+    {
+        for($i = 0;$i < 10 ; $i++)
+        {
+            factory(\App\Book::class)->create();
+        };
+
+        $count = \App\Book::get()->count();
+        $book = \App\Book::find(rand(1, $count));
+        $data = $book -> toArray();
+        $id = $book->id;
+        $this->assertDatabaseHas('books',$data);
+
+        $this->delete('api/books/',[$id]);
+
+        //質問
+        $this->assertDatabaseMissing('books',$data);
+        
+    }
+
+    //update()テスト
+    public function testApiUpdate()
+    {
+        for($i = 0;$i < 10 ; $i++)
+        {
+            factory(\App\Book::class)->create();
+        };
+
+        $count = \App\Book::get()->count();
+        $book = \App\Book::find(rand(11, $count+10));
+        $data = $book -> toArray();
+        $id = $book->id;
+
+        $this->assertDatabaseHas('books',$data);
+
+        $update = [
+            'title' => 'update',
+            'category' => '実用書',
+            'read_flg' => 0
+        ];
+
+        $this->put('api/books/',[$id],$update);
+        
+        //質問
+        //$this->assertDatabaseHas('books',$update);
+
+    }
+
 }
