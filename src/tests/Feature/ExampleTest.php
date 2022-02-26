@@ -15,23 +15,22 @@ class ExampleTest extends TestCase
      * @return void
      */
 
-    //use RefreshDatabase;
+    use RefreshDatabase;
 
     //viewのテスト
     public function testBasicTest()
     {   
-        // for($i = 0;$i < 10 ; $i++)
-        // {
-        //     factory(\App\Book::class)->create();
-    
-        // };
+        $book = factory(\App\Book::class)->create();
 
         $response = $this->get('/index');
         $response->assertStatus(200);
     }
 
     //index()テスト
-    public function testApiIndex(){
+    public function testApiIndex()
+    {
+        $book = factory(\App\Book::class)->create();
+        
         $this->get('api/books')
         ->assertOk()
         ->assertJsonStructure([
@@ -45,7 +44,8 @@ class ExampleTest extends TestCase
     }
 
     //store()テスト
-    public function testApiStore(){
+    public function testApiStore()
+    {
         $data = [
                 'title' => 'store()テスト',
                 'category' => '文芸',
@@ -59,36 +59,25 @@ class ExampleTest extends TestCase
     //destroy()テスト
     public function testApiDestroy()
     {
-        for($i = 0;$i < 10 ; $i++)
-        {
-            factory(\App\Book::class)->create();
-        };
+        $book = factory(\App\Book::class)->create();
 
-        $count = \App\Book::get()->count();
-        $book = \App\Book::find(rand(1, $count));
         $data = $book -> toArray();
         $id = $book->id;
         $this->assertDatabaseHas('books',$data);
 
-        $this->delete('api/books/',[$id]);
+        $this->delete(action('BookController@destroy',$id));
 
         //質問
         $this->assertDatabaseMissing('books',$data);
-        
     }
 
     //update()テスト
     public function testApiUpdate()
     {
-        for($i = 0;$i < 10 ; $i++)
-        {
-            factory(\App\Book::class)->create();
-        };
+        $book = factory(\App\Book::class)->create();
 
-        $count = \App\Book::get()->count();
-        $book = \App\Book::find(rand(11, $count+10));
         $data = $book -> toArray();
-        $id = $book->id;
+        $id = $book -> id;
 
         $this->assertDatabaseHas('books',$data);
 
@@ -98,10 +87,10 @@ class ExampleTest extends TestCase
             'read_flg' => 0
         ];
 
-        $this->put('api/books/',[$id],$update);
+        $this->put(action('BookController@update',$id),$update);
         
         //質問
-        //$this->assertDatabaseHas('books',$update);
+        $this->assertDatabaseHas('books',$update);
 
     }
 

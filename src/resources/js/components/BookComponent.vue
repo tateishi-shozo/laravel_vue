@@ -121,7 +121,7 @@ export default {
                 this.message = ''
             })
         },
-
+        
         //登録した本の削除
         deleteBook(id) {
             const index = this.books.findIndex((book) => book.id === id )
@@ -170,7 +170,6 @@ export default {
             this.updateId = '',
             this.message = "キャンセルしました!!"            
         }
-
     }
 }
 </script>
