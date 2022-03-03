@@ -21,4 +21,4 @@ Route::apiResource('/books','BookController');
 
 Route::delete('/destroy/{id}', 'BookController@destroy');
 
-Route::put('/update/{id}', 'BookController@update');
+Route::put('/update/{update}', 'BookController@update');

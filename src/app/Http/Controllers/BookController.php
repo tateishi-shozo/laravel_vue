@@ -48,7 +48,6 @@ class BookController extends Controller
      */
     public function update(Request $request,$id)
     {
-        //dd($request);
          $update = [
             'category' => $request->category,
             'read_flg' => $request->read_flg,
