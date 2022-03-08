@@ -1,4 +1,5 @@
-import ExampleComponent from "../components/BookComponent";
+import BookComponent from "../components/BookComponent";
+import { axios } from 'axios';
 
 const { mount } = require("@vue/test-utils");
 

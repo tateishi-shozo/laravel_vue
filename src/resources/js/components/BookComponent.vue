@@ -3,8 +3,8 @@
         <div class="navbar navbar-light navbar-dark bg-dark">
             <h2 class="navbar-brand">MYライブラリー</h2>
         </div>
-        <div>
-            <div>
+        <div class="input-form">
+            <div class="message">
                 <h3>新規登録</h3>
                 {{ message }}
             </div>
@@ -21,7 +21,7 @@
                 <button class="btn btn-primary" @click="addBook">追加</button>
             </div>
         </div>
-        <div class="edit_form" v-if="editFlg">
+        <div class="edit-form" v-if="editFlg">
             <h3>編集フォーム</h3>
             <p>タイトル：<input type="text" v-model="updateTitle"></p>
             <p>カテゴリー：
@@ -89,7 +89,6 @@ export default {
         //登録した本の一覧表示
         getBook(){
             console.log("マウント")
-            //const vm = this
             axios.get('api/books')
             .then((response) => {
                 this.books = response.data
@@ -173,3 +172,14 @@ export default {
     }
 }
 </script>
+<style scoped lang="scss">
+
+.input-form {
+    margin-left : 30px;
+}
+
+.edit-form {
+    margin-left : 30px;
+}
+
+</style>
