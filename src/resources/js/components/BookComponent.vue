@@ -9,7 +9,7 @@
                 {{ message }}
             </div>
             <div>
-                <p>タイトル：<input type="text" v-model="title"></p>
+                <p>タイトル：<input type="text" v-model="title" id="newtitle"></p>
                 <p>カテゴリー：
                     <input type="radio" name="category" value="文芸" v-model="category">文芸
                     <input type="radio" name="category" value="実用書" v-model="category">実用書
@@ -18,7 +18,7 @@
                     <input type="radio" name="category" value="学習参考書/専門書" v-model="category">学習参考書/専門書
                     <input type="radio" name="category" value="コミック/雑誌" v-model="category">コミック/雑誌
                 </p>
-                <button class="btn btn-primary" @click="addBook">追加</button>
+                <button class="btn btn-primary" @click="addBook" id="add">追加</button>
             </div>
         </div>
         <div class="edit-form" v-if="editFlg">
@@ -35,7 +35,7 @@
             <div class="btn-toolbar">
                 <div class="btn-group">
                     <button @click="updateBook(updateId)" class="btn btn-primary">変更</button>
-                    <button @click="updateCancel" class="btn btn-secondary">キャンセル</button>
+                    <button @click="updateCancel" class="btn btn-secondary" id="cancel">キャンセル</button>
                 </div>
             </div>
         </div>        
@@ -54,8 +54,8 @@
                 <td>
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary">編集</button>
-                            <button @click="deleteBook(book.id)" class="btn btn-danger">削除</button>
+                            <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit">編集</button>
+                            <button @click="deleteBook(book.id)" class="btn btn-danger" id="delete">削除</button>
                         </div>
                     </div>
                 </td>
@@ -66,6 +66,8 @@
     </div>
 </template>
 <script>
+import axios from"axios";
+
 export default {
     data() {
         return{
