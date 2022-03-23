@@ -6,6 +6,11 @@ const { mount } = require("@vue/test-utils");
 
 describe("テスト", () => {
   let component;
+  const addBook = jest.spyOn(BookComponent.methods, 'addBook');
+  const updateForm = jest.spyOn(BookComponent.methods, 'updateForm');
+  const deleteBook = jest.spyOn(BookComponent.methods, 'deleteBook');
+  const updateBook = jest.spyOn(BookComponent.methods, 'updateBook');
+  const updateCancel = jest.spyOn(BookComponent.methods, 'updateCancel');
 
   beforeEach(() => {
     component = mount(BookComponent);
@@ -50,14 +55,28 @@ describe("テスト", () => {
     expect(component.text()).not.toContain("テスト本")
   });
 
-  it("新規作成テスト", async() => {
-    component.get('#newtitle').setValue('テスト本2')
-    const category = component.get('input[value="文芸"]')
-    await category.setChecked()
-    await component.get('#add').trigger('click')
-    
-    console.log(component.html())
+  it("編集ボタンをクリックしてメソッドが呼び出されているかテスト", () => {
+    component.get('#edit').trigger('click')
+    expect(updateForm).toHaveBeenCalled()
   });
 
+  it("削除ボタンをクリックしてメソッドが呼び出されているかテスト", () => {
+    component.get('#delete').trigger('click')
+    expect(deleteBook).toHaveBeenCalled()
+  });
+
+  it("編集ボタンをクリックしてメソッドが呼び出されているかテスト", async() => {
+    await component.get('#edit').trigger('click')
+    
+    component.get('#update').trigger('click')
+    expect(updateBook).toHaveBeenCalled()
+  });
+
+  it("キャンセルボタンをクリックしてメソッドが呼び出されているかテスト", async() => {
+    await component.get('#edit').trigger('click')
+    
+    component.get('#cancel').trigger('click')
+    expect(updateCancel).toHaveBeenCalled()
+  });
 
 });

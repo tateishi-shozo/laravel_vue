@@ -34,7 +34,7 @@
             </p>
             <div class="btn-toolbar">
                 <div class="btn-group">
-                    <button @click="updateBook(updateId)" class="btn btn-primary">変更</button>
+                    <button @click="updateBook(updateId)" class="btn btn-primary" id="update">変更</button>
                     <button @click="updateCancel" class="btn btn-secondary" id="cancel">キャンセル</button>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="book in books">
+                <tr v-for="book in books" :key="book.id">
                 <td>{{ book.title }}</td>
                 <td>{{ book.category }}</td>
                 <td>
