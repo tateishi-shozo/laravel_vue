@@ -8,7 +8,7 @@
                 <h3>新規登録</h3>
                 {{ message }}
             </div>
-            <div>
+            <form>
                 <p>タイトル：<input type="text" v-model="title" id="newtitle"></p>
                 <p>カテゴリー：
                     <input type="radio" name="category" value="文芸" v-model="category">文芸
@@ -18,8 +18,8 @@
                     <input type="radio" name="category" value="学習参考書/専門書" v-model="category">学習参考書/専門書
                     <input type="radio" name="category" value="コミック/雑誌" v-model="category">コミック/雑誌
                 </p>
-                <button class="btn btn-primary" @click="addBook" id="add">追加</button>
-            </div>
+                <button class="btn btn-primary" @click="addBook" id="add" :disabled="isActive">追加</button>
+            </form>
         </div>
         <div class="edit-form" v-if="editFlg">
             <h3>編集フォーム</h3>
@@ -54,8 +54,8 @@
                 <td>
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit">編集</button>
-                            <button @click="deleteBook(book.id)" class="btn btn-danger" id="delete">削除</button>
+                            <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit" :disabled="isActive">編集</button>
+                            <button @click="deleteBook(book.id)" class="btn btn-danger" id="delete" :disabled="isActive">削除</button>
                         </div>
                     </div>
                 </td>
@@ -79,7 +79,8 @@ export default {
             updateId: '',
             updateTitle: '',
             updateCategory: '',
-            books: []
+            books: [],
+            isActive: false
         }
     },
 
@@ -90,47 +91,60 @@ export default {
     methods: {
         //登録した本の一覧表示
         getBook(){
-            console.log("マウント")
-            axios.get('api/books')
-            .then((response) => {
-                this.books = response.data
-            })
+            try{
+                axios.get('api/books')
+                .then((response) => {
+                    this.books = response.data
+                })
+            }catch(error){
+                console.log(error)
+            }
+            
         },
 
         //本の新規登録
         addBook(event) {
-            if( this.title == "" || this.category == ""){
-                this.message = "全て入力してください!!"
-                return
-            }
-            console.log("クリック")
-            axios.post('api/books',{
-                title: this.title,
-                category: this.category,
-                read_flg: 0
-            })
-            .then(()=>{
-                console.log("更新")
-                let newbook = {
-                    title: this.title,
-                    category: this.category
+            try{
+                if( this.title == "" || this.category == ""){
+                    this.message = "全て入力してください!!"
+                    return
                 }
-                this.books.push(newbook)
+    
+                axios.post('api/books',{
+                    title: this.title,
+                    category: this.category,
+                    read_flg: 0
+                })
+                .then(()=>{
+                    let newbook = {
+                        title: this.title,
+                        category: this.category
+                    }
+                    this.books.push(newbook)
 
-                this.title = '',
-                this.category = '',
-                this.message = ''
-            })
+                    this.title = '',
+                    this.category = '',
+                    this.message = ''
+                })
+            }catch(error){
+                console.log(error)
+            }
+
         },
         
         //登録した本の削除
         deleteBook(id) {
-            const index = this.books.findIndex((book) => book.id === id )
-            axios.delete('api/books/' + id)
-            .then(
-                this.books.splice(index,1),
-                this.message = "削除しました!!"
-            )
+            try{
+                const index = this.books.findIndex((book) => book.id === id )
+                axios.delete('api/books/' + id)
+                .then(
+                    this.books.splice(index,1),
+                    this.message = "削除しました!!"
+                )
+            }catch(error){
+                console.log(error)
+            }
+
         },
 
         //本の編集フォームを開く
@@ -138,29 +152,36 @@ export default {
             this.editFlg = true,
             this.updateTitle = title,
             this.updateCategory = category,
-            this.updateId = id
+            this.updateId = id,
+            this.isActive= true
         },
 
         //本の編集
         updateBook(updateId) {
-            const index = this.books.findIndex((book) => book.id === updateId )
-            axios.put('api/books/' + updateId ,{
-                title: this.updateTitle,
-                category: this.updateCategory,
-                read_flg: 0
-            })
-            .then(
-                this.books.splice(index,1,{
+            try{
+                const index = this.books.findIndex((book) => book.id === updateId )
+                axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
-                    category: this.updateCategory
+                    category: this.updateCategory,
+                    read_flg: 0
                 })
-            )
-            this.editFlg = false,
-            this.updateTitle = '',
-            this.updateCategory = '',
-            this.updateId = '',
-            this.message = "変更しました!!"
-            console.log(index)
+                .then(
+                    this.books.splice(index,1,{
+                        title: this.updateTitle,
+                        category: this.updateCategory
+                    })
+                )
+                this.editFlg = false,
+                this.updateTitle = '',
+                this.updateCategory = '',
+                this.updateId = '',
+                this.isActive= false,
+                this.message = "変更しました!!"
+                console.log(index)                
+            }catch(error){
+                console.log(error)
+            }
+
         },
 
         //本の編集のキャンセル
@@ -169,6 +190,7 @@ export default {
             this.updateTitle = '',
             this.updateCategory = '',
             this.updateId = '',
+            this.isActive= false,
             this.message = "キャンセルしました!!"            
         }
     }

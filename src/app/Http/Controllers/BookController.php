@@ -48,7 +48,7 @@ class BookController extends Controller
      */
     public function update(Request $request,$id)
     {
-         $update = [
+        $update = [
             'category' => $request->category,
             'read_flg' => $request->read_flg,
             'title' => $request->title,
@@ -56,7 +56,6 @@ class BookController extends Controller
             'conclude' => $request->conclude,
             'image' => $request->image
         ];
-        
         Book::where('id',$id)->update($update);
     }
 
