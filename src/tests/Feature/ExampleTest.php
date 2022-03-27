@@ -67,7 +67,6 @@ class ExampleTest extends TestCase
 
         $this->delete(action('BookController@destroy',$id));
 
-        //質問
         $this->assertDatabaseMissing('books',$data);
     }
 
@@ -89,7 +88,6 @@ class ExampleTest extends TestCase
 
         $this->put(action('BookController@update',$id),$update);
         
-        //質問
         $this->assertDatabaseHas('books',$update);
 
     }

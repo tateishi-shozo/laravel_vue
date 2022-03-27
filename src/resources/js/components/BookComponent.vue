@@ -80,7 +80,7 @@ export default {
             updateTitle: '',
             updateCategory: '',
             books: [],
-            isActive: false
+            isActive: false,
         }
     },
 
@@ -91,25 +91,22 @@ export default {
     methods: {
         //登録した本の一覧表示
         getBook(){
-            try{
                 axios.get('api/books')
                 .then((response) => {
                     this.books = response.data
                 })
-            }catch(error){
-                console.log(error)
-            }
-            
+                .catch(error => {
+                    this.message = error;
+                })
         },
 
         //本の新規登録
-        addBook(event) {
-            try{
+        addBook() {
                 if( this.title == "" || this.category == ""){
                     this.message = "全て入力してください!!"
                     return
                 }
-    
+
                 axios.post('api/books',{
                     title: this.title,
                     category: this.category,
@@ -126,25 +123,22 @@ export default {
                     this.category = '',
                     this.message = ''
                 })
-            }catch(error){
-                console.log(error)
-            }
-
+                .catch(error => {
+                    this.message = error;
+                })
         },
         
         //登録した本の削除
         deleteBook(id) {
-            try{
                 const index = this.books.findIndex((book) => book.id === id )
                 axios.delete('api/books/' + id)
                 .then(
                     this.books.splice(index,1),
                     this.message = "削除しました!!"
                 )
-            }catch(error){
-                console.log(error)
-            }
-
+                .catch(error => {
+                    this.message = error;
+                })
         },
 
         //本の編集フォームを開く
@@ -158,7 +152,7 @@ export default {
 
         //本の編集
         updateBook(updateId) {
-            try{
+
                 const index = this.books.findIndex((book) => book.id === updateId )
                 axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
@@ -171,16 +165,16 @@ export default {
                         category: this.updateCategory
                     })
                 )
+                .catch(error => {
+                    this.message = error;
+                })
+
                 this.editFlg = false,
                 this.updateTitle = '',
                 this.updateCategory = '',
                 this.updateId = '',
                 this.isActive= false,
                 this.message = "変更しました!!"
-                console.log(index)                
-            }catch(error){
-                console.log(error)
-            }
 
         },
 

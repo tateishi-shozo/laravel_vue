@@ -22960,52 +22960,48 @@ __webpack_require__.r(__webpack_exports__);
     getBook: function getBook() {
       var _this = this;
 
-      try {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/books').then(function (response) {
-          _this.books = response.data;
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/books').then(function (response) {
+        _this.books = response.data;
+      })["catch"](function (error) {
+        _this.message = error;
+      });
     },
     //本の新規登録
-    addBook: function addBook(event) {
+    addBook: function addBook() {
       var _this2 = this;
 
-      try {
-        if (this.title == "" || this.category == "") {
-          this.message = "全て入力してください!!";
-          return;
-        }
-
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/books', {
-          title: this.title,
-          category: this.category,
-          read_flg: 0
-        }).then(function () {
-          var newbook = {
-            title: _this2.title,
-            category: _this2.category
-          };
-
-          _this2.books.push(newbook);
-
-          _this2.title = '', _this2.category = '', _this2.message = '';
-        });
-      } catch (error) {
-        console.log(error);
+      if (this.title == "" || this.category == "") {
+        this.message = "全て入力してください!!";
+        return;
       }
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/books', {
+        title: this.title,
+        category: this.category,
+        read_flg: 0
+      }).then(function () {
+        var newbook = {
+          title: _this2.title,
+          category: _this2.category
+        };
+
+        _this2.books.push(newbook);
+
+        _this2.title = '', _this2.category = '', _this2.message = '';
+      })["catch"](function (error) {
+        _this2.message = error;
+      });
     },
     //登録した本の削除
     deleteBook: function deleteBook(id) {
-      try {
-        var index = this.books.findIndex(function (book) {
-          return book.id === id;
-        });
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('api/books/' + id).then(this.books.splice(index, 1), this.message = "削除しました!!");
-      } catch (error) {
-        console.log(error);
-      }
+      var _this3 = this;
+
+      var index = this.books.findIndex(function (book) {
+        return book.id === id;
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('api/books/' + id).then(this.books.splice(index, 1), this.message = "削除しました!!")["catch"](function (error) {
+        _this3.message = error;
+      });
     },
     //本の編集フォームを開く
     updateForm: function updateForm(id, title, category) {
@@ -23013,23 +23009,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     //本の編集
     updateBook: function updateBook(updateId) {
-      try {
-        var index = this.books.findIndex(function (book) {
-          return book.id === updateId;
-        });
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.put('api/books/' + updateId, {
-          title: this.updateTitle,
-          category: this.updateCategory,
-          read_flg: 0
-        }).then(this.books.splice(index, 1, {
-          title: this.updateTitle,
-          category: this.updateCategory
-        }));
-        this.editFlg = false, this.updateTitle = '', this.updateCategory = '', this.updateId = '', this.isActive = false, this.message = "変更しました!!";
-        console.log(index);
-      } catch (error) {
-        console.log(error);
-      }
+      var _this4 = this;
+
+      var index = this.books.findIndex(function (book) {
+        return book.id === updateId;
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put('api/books/' + updateId, {
+        title: this.updateTitle,
+        category: this.updateCategory,
+        read_flg: 0
+      }).then(this.books.splice(index, 1, {
+        title: this.updateTitle,
+        category: this.updateCategory
+      }))["catch"](function (error) {
+        _this4.message = error;
+      });
+      this.editFlg = false, this.updateTitle = '', this.updateCategory = '', this.updateId = '', this.isActive = false, this.message = "変更しました!!";
     },
     //本の編集のキャンセル
     updateCancel: function updateCancel() {

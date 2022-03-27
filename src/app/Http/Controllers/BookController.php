@@ -25,6 +25,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request -> validate([
+            'title' => 'required',
+            'category' => 'required',
+            'read_flg' => 'required'
+        ]);
+
         Book::create($request->all());
     }
 
@@ -48,6 +54,12 @@ class BookController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $validatedData = $request -> validate([
+            'title' => 'required',
+            'category' => 'required',
+            'read_flg' => 'required'
+        ]);
+        
         $update = [
             'category' => $request->category,
             'read_flg' => $request->read_flg,
@@ -56,6 +68,7 @@ class BookController extends Controller
             'conclude' => $request->conclude,
             'image' => $request->image
         ];
+
         Book::where('id',$id)->update($update);
     }
 
