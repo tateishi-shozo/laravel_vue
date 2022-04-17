@@ -43,18 +43,3 @@ services:
       TZ: 'Asia/Tokyo'
     volumes:
       - mysql-volume:/var/lib/mysql
-
-  db_test:
-    build:
-      context: .
-      dockerfile: ./docker/mysql/Dockerfile
-    ports:
-      - 3000:3306
-    environment:
-      MYSQL_DATABASE: first
-      MYSQL_USER: tateishishozo
-      MYSQL_PASSWORD: tateishishozo
-      MYSQL_ROOT_PASSWORD: root
-      TZ: 'Asia/Tokyo'
-    # volumes:
-    #   - mysql-volume:/var/lib/mysql

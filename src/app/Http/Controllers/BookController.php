@@ -54,11 +54,6 @@ class BookController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $validatedData = $request -> validate([
-            'title' => 'required',
-            'category' => 'required',
-            'read_flg' => 'required'
-        ]);
         
         $update = [
             'category' => $request->category,
