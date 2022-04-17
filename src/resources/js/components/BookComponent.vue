@@ -159,6 +159,7 @@ export default {
                 })
                 .then(
                     this.books.splice(index,1,{
+                        id: this.updateId,
                         title: this.updateTitle,
                         category: this.updateCategory
                     })

@@ -23127,6 +23127,7 @@ __webpack_require__.r(__webpack_exports__);
         category: this.updateCategory,
         read_flg: 0
       }).then(this.books.splice(index, 1, {
+        id: this.updateId,
         title: this.updateTitle,
         category: this.updateCategory
       }))["catch"](function (error) {
