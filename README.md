@@ -1,4 +1,4 @@
-# Myライブラリー
+# MYライブラリー
 読みたい本のタイトル・カテゴリーを残すアプリ　<br>
 https://mylibrarylaravelvue.herokuapp.com/index<br>
 
