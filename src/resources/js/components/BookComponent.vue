@@ -116,6 +116,7 @@ export default {
                         category: this.category
                     }
                     this.books.push(newbook)
+                    this.getBook()
 
                     this.title = '',
                     this.category = '',

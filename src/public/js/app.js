@@ -23095,6 +23095,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.books.push(newbook);
 
+        _this2.getBook();
+
         _this2.title = '', _this2.category = '', _this2.message = '';
       })["catch"](function (error) {
         _this2.message = error;
