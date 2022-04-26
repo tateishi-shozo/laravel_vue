@@ -88,56 +88,58 @@ export default {
 
     methods: {
         //登録した本の一覧表示
-        getBook(){
-                axios.get('api/books')
-                .then((response) => {
-                    this.books = response.data;
-                })
-                .catch(error => {
+        async getBook(){
+            try{
+                const response = await axios.get('api/books');
+                this.books = response.data;
+
+                }catch(error){
                     this.message = error;
-                });
+                };
         },
 
         //本の新規登録
-        addBook() {
+        async addBook() {
+            try{
                 if( this.title == "" || this.category == ""){
                     this.message = "全て入力してください!!";
                     return
                 };
 
-                axios.post('api/books',{
+                await axios.post('api/books',{
                     title: this.title,
                     category: this.category,
                     read_flg: 0
-                })
-                .then(()=>{
-                    let newbook = {
-                        title: this.title,
-                        category: this.category
-                    };
-                    this.books.push(newbook);
-                    this.getBook();
-
-                    this.title = '';
-                    this.category = '';
-                    this.message = '';
-                })
-                .catch(error => {
-                    this.message = error;
                 });
+
+                let newbook = {
+                    title: this.title,
+                    category: this.category
+                };
+                this.books.push(newbook);
+                this.getBook();
+
+                this.title = '';
+                this.category = '';
+                this.message = '';
+
+                }catch(error){
+                    this.message = error;
+                };
         },
         
         //登録した本の削除
-        deleteBook(id) {
+        async deleteBook(id) {
+            try{
                 const index = this.books.findIndex((book) => book.id === id );
-                axios.delete('api/books/' + id)
-                .then(
-                    this.books.splice(index,1),
-                    this.message = "削除しました!!"
-                )
-                .catch(error => {
+
+                await axios.delete('api/books/' + id);
+                this.books.splice(index,1);
+                this.message = "削除しました!!";
+
+                }catch(error){
                     this.message = error;
-                });
+                };
         },
 
         //本の編集フォームを開く
@@ -150,24 +152,24 @@ export default {
         },
 
         //本の編集
-        updateBook(updateId) {
-
+        async updateBook(updateId) {
+            try{
                 const index = this.books.findIndex((book) => book.id === updateId );
-                axios.put('api/books/' + updateId ,{
+                await axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
                     category: this.updateCategory,
                     read_flg: 0
-                })
-                .then(
-                    this.books.splice(index,1,{
-                        id: this.updateId,
-                        title: this.updateTitle,
-                        category: this.updateCategory
-                    })
-                )
-                .catch(error => {
+                });
+
+                this.books.splice(index,1,{
+                    id: this.updateId,
+                    title: this.updateTitle,
+                    category: this.updateCategory
+                });
+
+                }catch(error){
                     this.message = error;
-                })
+                };
 
                 this.editFlg = false;
                 this.updateTitle = '';
