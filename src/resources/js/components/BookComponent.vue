@@ -79,11 +79,11 @@ export default {
             updateCategory: '',
             books: [],
             isActive: false,
-        }
+        };
     },
 
     mounted: function() {
-        this.getBook()
+        this.getBook();
     },
 
     methods: {
@@ -91,19 +91,19 @@ export default {
         getBook(){
                 axios.get('api/books')
                 .then((response) => {
-                    this.books = response.data
+                    this.books = response.data;
                 })
                 .catch(error => {
                     this.message = error;
-                })
+                });
         },
 
         //本の新規登録
         addBook() {
                 if( this.title == "" || this.category == ""){
-                    this.message = "全て入力してください!!"
+                    this.message = "全て入力してください!!";
                     return
-                }
+                };
 
                 axios.post('api/books',{
                     title: this.title,
@@ -114,22 +114,22 @@ export default {
                     let newbook = {
                         title: this.title,
                         category: this.category
-                    }
-                    this.books.push(newbook)
-                    this.getBook()
+                    };
+                    this.books.push(newbook);
+                    this.getBook();
 
-                    this.title = '',
-                    this.category = '',
-                    this.message = ''
+                    this.title = '';
+                    this.category = '';
+                    this.message = '';
                 })
                 .catch(error => {
                     this.message = error;
-                })
+                });
         },
         
         //登録した本の削除
         deleteBook(id) {
-                const index = this.books.findIndex((book) => book.id === id )
+                const index = this.books.findIndex((book) => book.id === id );
                 axios.delete('api/books/' + id)
                 .then(
                     this.books.splice(index,1),
@@ -137,22 +137,22 @@ export default {
                 )
                 .catch(error => {
                     this.message = error;
-                })
+                });
         },
 
         //本の編集フォームを開く
         updateForm(id,title,category){
-            this.editFlg = true,
-            this.updateTitle = title,
-            this.updateCategory = category,
-            this.updateId = id,
-            this.isActive= true
+            this.editFlg = true;
+            this.updateTitle = title;
+            this.updateCategory = category;
+            this.updateId = id;
+            this.isActive= true;
         },
 
         //本の編集
         updateBook(updateId) {
 
-                const index = this.books.findIndex((book) => book.id === updateId )
+                const index = this.books.findIndex((book) => book.id === updateId );
                 axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
                     category: this.updateCategory,
@@ -169,23 +169,23 @@ export default {
                     this.message = error;
                 })
 
-                this.editFlg = false,
-                this.updateTitle = '',
-                this.updateCategory = '',
-                this.updateId = '',
-                this.isActive= false,
-                this.message = "変更しました!!"
+                this.editFlg = false;
+                this.updateTitle = '';
+                this.updateCategory = '';
+                this.updateId = '';
+                this.isActive= false;
+                this.message = "変更しました!!";
 
         },
 
         //本の編集のキャンセル
         updateCancel() {
-            this.editFlg = false,
-            this.updateTitle = '',
-            this.updateCategory = '',
-            this.updateId = '',
-            this.isActive= false,
-            this.message = "キャンセルしました!!"            
+            this.editFlg = false;
+            this.updateTitle = '';
+            this.updateCategory = '';
+            this.updateId = '';
+            this.isActive= false;
+            this.message = "キャンセルしました!!";         
         }
     }
 }
