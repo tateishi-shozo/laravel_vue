@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BookPost;
 use App\Book;
 
 class BookController extends Controller
@@ -20,17 +21,11 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  BookPost  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookPost $request)
     {
-        $validatedData = $request -> validate([
-            'title' => 'required',
-            'category' => 'required',
-            'read_flg' => 'required'
-        ]);
-
         Book::create($request->all());
     }
 
@@ -48,18 +43,12 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  BookPost $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(BookPost $request,$id)
     {
-        $validatedData = $request -> validate([
-            'title' => 'required',
-            'category' => 'required',
-            'read_flg' => 'required'
-        ]);
-        
         $update = [
             'category' => $request->category,
             'read_flg' => $request->read_flg,

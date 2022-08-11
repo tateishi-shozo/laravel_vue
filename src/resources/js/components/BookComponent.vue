@@ -92,7 +92,6 @@ export default {
             try{
                 const response = await axios.get('api/books');
                 this.books = response.data;
-
                 }catch(error){
                     this.message = error;
                 };
