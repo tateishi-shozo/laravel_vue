@@ -61,6 +61,16 @@
             </tbody>
             </table>
         </div>
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <div class="prev-button">
+                    <button @click="prevPage()" v-show="isDisplayPrev" class="btn">&lt;&lt;前へ</button>
+                </div>
+                <div class="next-button">
+                    <button @click="nextPage()" v-show="isDisplayNext" class="btn">次へ&gt;&gt;</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -79,6 +89,10 @@ export default {
             updateCategory: '',
             books: [],
             isActive: false,
+            current_page: 1,
+            last_page: '',
+            isDisplayPrev: false,
+            isDisplayNext: true,
         };
     },
 
@@ -90,8 +104,13 @@ export default {
         //登録した本の一覧表示
         async getBook(){
             try{
-                const response = await axios.get('api/books');
-                this.books = response.data;
+                const response = await axios.get(`api/books?page=${this.current_page}`);
+                const books = response.data;
+                console.log(books);
+                this.books = books.data;
+                this.current_page = books.current_page;
+                this.last_page = books.last_page;
+
                 }catch(error){
                     this.message = error;
                 };
@@ -131,7 +150,6 @@ export default {
         async deleteBook(id) {
             try{
                 const index = this.books.findIndex((book) => book.id === id );
-
                 await axios.delete('api/books/' + id);
                 this.books.splice(index,1);
                 this.message = "削除しました!!";
@@ -187,6 +205,37 @@ export default {
             this.updateId = '';
             this.isActive= false;
             this.message = "キャンセルしました!!";         
+        },
+
+        //ページネーション
+        nextPage(){
+            const next_page = this.current_page + 1;
+            this.current_page = next_page;
+            this.getBook();
+
+            if(this.current_page >= this.last_page){
+                this.isDisplayNext = false;
+            }else if(this.current_page <= 1){
+                this.isDisplayPrev = false;
+            }else{
+                this.isDisplayNext = true;
+                this.isDisplayPrev = true;
+            };
+        },
+
+        prevPage(){
+            const prev_page = this.current_page - 1;
+            this.current_page = prev_page;
+            this.getBook();
+            
+            if(this.current_page >= this.last_page){
+                this.isDisplayNext = false;
+            }else if(this.current_page <= 1){
+                this.isDisplayPrev = false;
+            }else{
+                this.isDisplayNext = true;
+                this.isDisplayPrev = true;
+            };
         }
     }
 }

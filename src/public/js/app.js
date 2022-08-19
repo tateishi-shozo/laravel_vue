@@ -23125,7 +23125,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       updateTitle: '',
       updateCategory: '',
       books: [],
-      isActive: false
+      isActive: false,
+      current_page: 1,
+      last_page: '',
+      isDisplayPrev: false,
+      isDisplayNext: true
     };
   },
   mounted: function mounted() {
@@ -23137,35 +23141,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var response;
+        var response, books;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/books');
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/books?page=".concat(_this.current_page));
 
               case 3:
                 response = _context.sent;
-                _this.books = response.data;
-                _context.next = 10;
+                books = response.data;
+                console.log(books);
+                _this.books = books.data;
+                _this.current_page = books.current_page;
+                _this.last_page = books.last_page;
+                _context.next = 14;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
                 _this.message = _context.t0;
 
-              case 10:
+              case 14:
                 ;
 
-              case 11:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 11]]);
       }))();
     },
     //本の新規登録
@@ -23338,6 +23346,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.updateId = '';
       this.isActive = false;
       this.message = "キャンセルしました!!";
+    },
+    //ページネーション
+    nextPage: function nextPage() {
+      var next_page = this.current_page + 1;
+      this.current_page = next_page;
+      this.getBook();
+
+      if (this.current_page >= this.last_page) {
+        this.isDisplayNext = false;
+      } else if (this.current_page <= 1) {
+        this.isDisplayPrev = false;
+      } else {
+        this.isDisplayNext = true;
+        this.isDisplayPrev = true;
+      }
+
+      ;
+    },
+    prevPage: function prevPage() {
+      var prev_page = this.current_page - 1;
+      this.current_page = prev_page;
+      this.getBook();
+
+      if (this.current_page >= this.last_page) {
+        this.isDisplayNext = false;
+      } else if (this.current_page <= 1) {
+        this.isDisplayPrev = false;
+      } else {
+        this.isDisplayNext = true;
+        this.isDisplayPrev = true;
+      }
+
+      ;
     }
   }
 });
@@ -23463,6 +23504,18 @@ var _hoisted_31 = {
 };
 var _hoisted_32 = ["onClick", "disabled"];
 var _hoisted_33 = ["onClick", "disabled"];
+var _hoisted_34 = {
+  "class": "btn-toolbar"
+};
+var _hoisted_35 = {
+  "class": "btn-group"
+};
+var _hoisted_36 = {
+  "class": "prev-button"
+};
+var _hoisted_37 = {
+  "class": "next-button"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("div", _hoisted_1, [_hoisted_2, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_3, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_4, [_hoisted_5, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])(" " + Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])($data.message), 1
   /* TEXT */
@@ -23638,7 +23691,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_33)])])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])]);
+  ))])])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_34, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_35, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_36, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+    onClick: _cache[17] || (_cache[17] = function ($event) {
+      return $options.prevPage();
+    }),
+    "class": "btn"
+  }, "<<前へ", 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vShow"], $data.isDisplayPrev]])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_37, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+    onClick: _cache[18] || (_cache[18] = function ($event) {
+      return $options.nextPage();
+    }),
+    "class": "btn"
+  }, "次へ>>", 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vShow"], $data.isDisplayNext]])])])])]);
 }
 
 /***/ }),
