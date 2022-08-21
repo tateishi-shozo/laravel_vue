@@ -151,8 +151,8 @@ export default {
             try{
                 const index = this.books.findIndex((book) => book.id === id );
                 await axios.delete('api/books/' + id);
-                this.books.splice(index,1);
                 this.message = "削除しました!!";
+                this.getBook();
 
                 }catch(error){
                     this.message = error;
@@ -178,11 +178,7 @@ export default {
                     read_flg: 0
                 });
 
-                this.books.splice(index,1,{
-                    id: this.updateId,
-                    title: this.updateTitle,
-                    category: this.updateCategory
-                });
+                this.getBook();
 
                 }catch(error){
                     this.message = error;

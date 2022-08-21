@@ -23255,9 +23255,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('api/books/' + id);
 
               case 4:
-                _this3.books.splice(index, 1);
-
                 _this3.message = "削除しました!!";
+
+                _this3.getBook();
+
                 _context3.next = 11;
                 break;
 
@@ -23307,11 +23308,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _this4.books.splice(index, 1, {
-                  id: _this4.updateId,
-                  title: _this4.updateTitle,
-                  category: _this4.updateCategory
-                });
+                _this4.getBook();
 
                 _context4.next = 10;
                 break;
