@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BookPost;
 use App\Book;
 use App\Http\Controllers\Controller;
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class BookController extends Controller
 {
@@ -16,8 +18,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(3);
-
+        try{
+            $books = Book::paginate(3);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
         return $books;
     }
 
@@ -29,7 +34,13 @@ class BookController extends Controller
      */
     public function store(BookPost $request)
     {
-        Book::create($request->all());
+        try{
+            $book = Book::make($request->all());
+            $book -> saveOrFail();
+        }catch(\Throwable $e){
+            \DB::rollback();
+            throw $e;
+        }
     }
 
     /**

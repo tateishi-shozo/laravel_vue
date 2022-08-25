@@ -23153,27 +23153,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
                 books = response.data;
-                console.log(books);
+                console.log(response);
                 _this.books = books.data;
                 _this.current_page = books.current_page;
                 _this.last_page = books.last_page;
-                _context.next = 14;
+
+                if (_this.current_page >= _this.last_page) {
+                  _this.isDisplayNext = false;
+
+                  if (_this.current_page <= 1) {
+                    _this.isDisplayPrev = false;
+                  } else {
+                    _this.isDisplayPrev = true;
+                  }
+                } else if (_this.current_page <= 1) {
+                  _this.isDisplayPrev = false;
+
+                  if (_this.current_page >= _this.last_page) {
+                    _this.isDisplayNext = false;
+                  } else {
+                    _this.isDisplayNext = true;
+                  }
+                } else {
+                  _this.isDisplayNext = true;
+                  _this.isDisplayPrev = true;
+                }
+
+                ;
+                _context.next = 16;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](0);
                 _this.message = _context.t0;
 
-              case 14:
+              case 16:
                 ;
 
-              case 15:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 11]]);
+        }, _callee, null, [[0, 13]]);
       }))();
     },
     //本の新規登録
@@ -23181,7 +23204,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var newbook;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -23206,35 +23228,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 7:
-                newbook = {
-                  title: _this2.title,
-                  category: _this2.category
-                };
-
-                _this2.books.push(newbook);
-
                 _this2.getBook();
 
                 _this2.title = '';
                 _this2.category = '';
                 _this2.message = '';
-                _context2.next = 18;
+                _context2.next = 16;
                 break;
 
-              case 15:
-                _context2.prev = 15;
+              case 13:
+                _context2.prev = 13;
                 _context2.t0 = _context2["catch"](0);
                 _this2.message = _context2.t0;
 
-              case 18:
+              case 16:
                 ;
 
-              case 19:
+              case 17:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 15]]);
+        }, _callee2, null, [[0, 13]]);
       }))();
     },
     //登録した本の削除
@@ -23349,33 +23364,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var next_page = this.current_page + 1;
       this.current_page = next_page;
       this.getBook();
-
-      if (this.current_page >= this.last_page) {
-        this.isDisplayNext = false;
-      } else if (this.current_page <= 1) {
-        this.isDisplayPrev = false;
-      } else {
-        this.isDisplayNext = true;
-        this.isDisplayPrev = true;
-      }
-
-      ;
     },
     prevPage: function prevPage() {
       var prev_page = this.current_page - 1;
       this.current_page = prev_page;
       this.getBook();
-
-      if (this.current_page >= this.last_page) {
-        this.isDisplayNext = false;
-      } else if (this.current_page <= 1) {
-        this.isDisplayPrev = false;
-      } else {
-        this.isDisplayNext = true;
-        this.isDisplayPrev = true;
-      }
-
-      ;
     }
   }
 });

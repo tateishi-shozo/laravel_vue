@@ -106,10 +106,33 @@ export default {
             try{
                 const response = await axios.get(`api/books?page=${this.current_page}`);
                 const books = response.data;
-                console.log(books);
+                console.log(response);
                 this.books = books.data;
                 this.current_page = books.current_page;
                 this.last_page = books.last_page;
+
+                if(this.current_page >= this.last_page){
+                    this.isDisplayNext = false;
+
+                    if(this.current_page <= 1){
+                        this.isDisplayPrev = false;
+                    }else{
+                        this.isDisplayPrev = true;
+                    }
+
+                }else if(this.current_page <= 1){
+                    this.isDisplayPrev = false;
+                    
+                    if(this.current_page >= this.last_page){
+                        this.isDisplayNext = false;
+                    }else{
+                        this.isDisplayNext = true;
+                    }
+
+                }else{
+                    this.isDisplayNext = true;
+                    this.isDisplayPrev = true;
+                };
 
                 }catch(error){
                     this.message = error;
@@ -129,12 +152,6 @@ export default {
                     category: this.category,
                     read_flg: 0
                 });
-
-                let newbook = {
-                    title: this.title,
-                    category: this.category
-                };
-                this.books.push(newbook);
                 this.getBook();
 
                 this.title = '';
@@ -208,30 +225,12 @@ export default {
             const next_page = this.current_page + 1;
             this.current_page = next_page;
             this.getBook();
-
-            if(this.current_page >= this.last_page){
-                this.isDisplayNext = false;
-            }else if(this.current_page <= 1){
-                this.isDisplayPrev = false;
-            }else{
-                this.isDisplayNext = true;
-                this.isDisplayPrev = true;
-            };
         },
 
         prevPage(){
             const prev_page = this.current_page - 1;
             this.current_page = prev_page;
             this.getBook();
-            
-            if(this.current_page >= this.last_page){
-                this.isDisplayNext = false;
-            }else if(this.current_page <= 1){
-                this.isDisplayPrev = false;
-            }else{
-                this.isDisplayNext = true;
-                this.isDisplayPrev = true;
-            };
         }
     }
 }
