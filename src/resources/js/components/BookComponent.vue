@@ -170,7 +170,7 @@ export default {
                 await axios.delete('api/books/' + id);
                 this.message = "削除しました!!";
                 this.getBook();
-
+                
                 }catch(error){
                     this.message = error;
                 };
