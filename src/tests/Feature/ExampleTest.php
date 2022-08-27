@@ -71,18 +71,18 @@ class ExampleTest extends TestCase
     }
 
     //store()バリデーションテスト
-    public function testExceptionStore()
-    {
-        $data = [
-            'title' => 'store()テスト',
-            'category' => '',
-            'read_flg' => 0
-        ];
+    // public function testExceptionStore()
+    // {
+    //     $data = [
+    //         'title' => 'store()テスト',
+    //         'category' => '',
+    //         'read_flg' => 0
+    //     ];
         
-        $this->withoutExceptionHandling();
-        $this->expectException(\Throwable::class);
-        $this->post('api/books',$data);
-    }
+    //     $this->withoutExceptionHandling();
+    //     $this->expectException(\Throwable::class);
+    //     $this->post('api/books',$data);
+    // }
 
     //store()DB保存できないテスト
     public function testSaveFailStore()
@@ -136,7 +136,7 @@ class ExampleTest extends TestCase
         $this->put(action('BookController@update',$id),$update);
     }
 
-    //update()DB失敗テスト
+    //update()保存失敗テスト
     public function testSaveFailUpdate()
     {
         DB::shouldReceive('saveOrFail')->andReturn(false);
@@ -167,7 +167,7 @@ class ExampleTest extends TestCase
     }
 
     //destroy()削除失敗テスト
-    public function testEceptionDestroy()
+    public function testFailDestroy()
     {
         $book = factory(\App\Book::class)->create();
 
