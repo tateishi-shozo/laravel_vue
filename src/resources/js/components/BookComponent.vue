@@ -135,6 +135,7 @@ export default {
                 };
 
                 }catch(error){
+                    console.log(error);
                     this.message = error;
                 };
         },
@@ -170,7 +171,7 @@ export default {
                 await axios.delete('api/books/' + id);
                 this.message = "削除しました!!";
                 this.getBook();
-                
+
                 }catch(error){
                     this.message = error;
                 };
@@ -197,6 +198,8 @@ export default {
 
                 this.getBook();
 
+                this.message = "変更しました!!";
+
                 }catch(error){
                     this.message = error;
                 };
@@ -206,7 +209,6 @@ export default {
                 this.updateCategory = '';
                 this.updateId = '';
                 this.isActive= false;
-                this.message = "変更しました!!";
 
         },
 

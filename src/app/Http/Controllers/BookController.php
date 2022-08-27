@@ -8,6 +8,7 @@ use App\Book;
 use App\Http\Controllers\Controller;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -19,11 +20,11 @@ class BookController extends Controller
     public function index()
     {
         try{
-            $books = Book::paginate(3);
-        }catch(\Exception $e){
-            return $e->getMessage();
+            $books = DB::table('books')->paginate(5);
+            return $books;
+        }catch(\Throwable $e){
+            throw $e;
         }
-        return $books;
     }
 
     /**
@@ -35,8 +36,10 @@ class BookController extends Controller
     public function store(BookPost $request)
     {
         try{
+            \DB::beginTransaction();
             $book = Book::make($request->all());
             $book -> saveOrFail();
+            \DB::commit();
         }catch(\Throwable $e){
             \DB::rollback();
             throw $e;
@@ -63,16 +66,20 @@ class BookController extends Controller
      */
     public function update(BookPost $request,$id)
     {
-        $update = [
-            'category' => $request->category,
-            'read_flg' => $request->read_flg,
-            'title' => $request->title,
-            'evaluation' => $request->evaluation,
-            'conclude' => $request->conclude,
-            'image' => $request->image
-        ];
-
-        Book::where('id',$id)->update($update);
+        try{
+            \DB::beginTransaction();
+            $book = Book::findOrFail($id);
+            $book -> fill(['category' => $request->category,'read_flg' => $request->read_flg,'title' => $request->title]);
+            $book -> saveOrFail();
+            \DB::commit();
+            
+        }catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+            throw $e;
+        }catch(\Throwable $e){
+            \DB::rollback();
+            \Log::error($e);
+            throw $e;
+        }
     }
 
     /**
@@ -83,6 +90,11 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        Book::where('id',$id)->delete();
+        try {
+            Book::destroy($id);
+        } catch (\Throwable $e) {
+            \Log::error($e);
+            throw $e;
+        }
     }
 }

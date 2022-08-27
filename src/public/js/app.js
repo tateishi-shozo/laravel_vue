@@ -23180,18 +23180,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 ;
-                _context.next = 16;
+                _context.next = 17;
                 break;
 
               case 13:
                 _context.prev = 13;
                 _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
                 _this.message = _context.t0;
 
-              case 16:
+              case 17:
                 ;
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -23325,29 +23326,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 _this4.getBook();
 
-                _context4.next = 10;
+                _this4.message = "変更しました!!";
+                _context4.next = 11;
                 break;
 
-              case 7:
-                _context4.prev = 7;
+              case 8:
+                _context4.prev = 8;
                 _context4.t0 = _context4["catch"](0);
                 _this4.message = _context4.t0;
 
-              case 10:
+              case 11:
                 ;
                 _this4.editFlg = false;
                 _this4.updateTitle = '';
                 _this4.updateCategory = '';
                 _this4.updateId = '';
                 _this4.isActive = false;
-                _this4.message = "変更しました!!";
 
               case 17:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 7]]);
+        }, _callee4, null, [[0, 8]]);
       }))();
     },
     //本の編集のキャンセル
