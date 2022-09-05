@@ -157,7 +157,7 @@ export default {
 
                 this.title = '';
                 this.category = '';
-                this.message = '';
+                this.message = '新規追加しました!!';
 
                 }catch(error){
                     this.message = error;

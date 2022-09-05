@@ -70,20 +70,6 @@ class ExampleTest extends TestCase
         ->assertOk();
     }
 
-    //store()バリデーションテスト
-    // public function testExceptionStore()
-    // {
-    //     $data = [
-    //         'title' => 'store()テスト',
-    //         'category' => '',
-    //         'read_flg' => 0
-    //     ];
-        
-    //     $this->withoutExceptionHandling();
-    //     $this->expectException(\Throwable::class);
-    //     $this->post('api/books',$data);
-    // }
-
     //store()DB保存できないテスト
     public function testSaveFailStore()
     {

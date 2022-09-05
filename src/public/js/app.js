@@ -23233,7 +23233,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.title = '';
                 _this2.category = '';
-                _this2.message = '';
+                _this2.message = '新規追加しました!!';
                 _context2.next = 16;
                 break;
 
