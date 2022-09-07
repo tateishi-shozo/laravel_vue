@@ -9,6 +9,6 @@ import '@babel/polyfill';
 
 createApp({
     components: {
-        'book-component':BookComponent,
+        'book-component':BookComponent
     },
 }).mount('#app')

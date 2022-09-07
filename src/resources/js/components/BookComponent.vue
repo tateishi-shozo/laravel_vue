@@ -8,28 +8,21 @@
                 <h3>新規登録</h3>
                 {{ message }}
             </div>
-            <p>タイトル：<input type="text" v-model="title" id="newtitle"></p>
-            <p>カテゴリー：
-                <input type="radio" name="category" value="文芸" v-model="category">文芸
-                <input type="radio" name="category" value="実用書" v-model="category">実用書
-                <input type="radio" name="category" value="ビジネス書" v-model="category">ビジネス書
-                <input type="radio" name="category" value="絵本/児童書" v-model="category">絵本/児童書
-                <input type="radio" name="category" value="学習参考書/専門書" v-model="category">学習参考書/専門書
-                <input type="radio" name="category" value="コミック/雑誌" v-model="category">コミック/雑誌
-            </p>
+            <p>タイトル</p>
+            <input type="text" v-model="title" id="newtitle">
+            <p>カテゴリー</p>
+                <div v-for=" item in items" :key="item.id">
+                    <input type="radio" name="category" :value="item" v-model="category">{{item}}
+                </div>
             <button class="btn btn-primary" @click="addBook" id="add" :disabled="isActive">追加</button>
         </div>
         <div class="edit-form" v-if="editFlg">
             <h3>編集フォーム</h3>
-            <p>タイトル：<input type="text" v-model="updateTitle"></p>
-            <p>カテゴリー：
-                <input type="radio" name="category" value="文芸" v-model="updateCategory">文芸
-                <input type="radio" name="category" value="実用書" v-model="updateCategory">実用書
-                <input type="radio" name="category" value="ビジネス書" v-model="updateCategory">ビジネス書
-                <input type="radio" name="category" value="絵本/児童書" v-model="updateCategory">絵本/児童書
-                <input type="radio" name="category" value="学習参考書/専門書" v-model="updateCategory">学習参考書/専門書
-                <input type="radio" name="category" value="コミック/雑誌" v-model="updateCategory">コミック/雑誌
-            </p>
+            <p>タイトル</p><input type="text" v-model="updateTitle">
+            <p>カテゴリー</p>
+                <div v-for=" item in items" :key="item.id">
+                    <input type="radio" name="category" :value="item" v-model="category">{{item}}
+                </div>
             <div class="btn-toolbar">
                 <div class="btn-group">
                     <button @click="updateBook(updateId)" class="btn btn-primary" id="update">変更</button>
@@ -93,6 +86,7 @@ export default {
             last_page: '',
             isDisplayPrev: false,
             isDisplayNext: true,
+            items: ["文芸","実用書","ビジネス書","絵本/児童書","学習参考書/専門書","コミック/雑誌"]
         };
     },
 

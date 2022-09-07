@@ -23129,7 +23129,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       current_page: 1,
       last_page: '',
       isDisplayPrev: false,
-      isDisplayNext: true
+      isDisplayNext: true,
+      items: ["文芸", "実用書", "ビジネス書", "絵本/児童書", "学習参考書/専門書", "コミック/雑誌"]
     };
   },
   mounted: function mounted() {
@@ -23420,64 +23421,58 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_6 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("タイトル：");
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, "タイトル", -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_7 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("カテゴリー： ");
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, "カテゴリー", -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_8 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("文芸 ");
-
-var _hoisted_9 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("実用書 ");
-
-var _hoisted_10 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("ビジネス書 ");
-
-var _hoisted_11 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("絵本/児童書 ");
-
-var _hoisted_12 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("学習参考書/専門書 ");
-
-var _hoisted_13 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("コミック/雑誌 ");
-
-var _hoisted_14 = ["disabled"];
-var _hoisted_15 = {
+var _hoisted_8 = ["value"];
+var _hoisted_9 = ["disabled"];
+var _hoisted_10 = {
   key: 0,
   "class": "edit-form"
 };
 
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("h3", null, "編集フォーム", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_17 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("タイトル：");
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, "タイトル", -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_18 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("カテゴリー： ");
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, "カテゴリー", -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_19 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("文芸 ");
-
-var _hoisted_20 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("実用書 ");
-
-var _hoisted_21 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("ビジネス書 ");
-
-var _hoisted_22 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("絵本/児童書 ");
-
-var _hoisted_23 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("学習参考書/専門書 ");
-
-var _hoisted_24 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])("コミック/雑誌 ");
-
-var _hoisted_25 = {
+var _hoisted_14 = ["value"];
+var _hoisted_15 = {
   "class": "btn-toolbar"
 };
-var _hoisted_26 = {
+var _hoisted_16 = {
   "class": "btn-group"
 };
-var _hoisted_27 = {
+var _hoisted_17 = {
   "class": "bg-light"
 };
-var _hoisted_28 = {
+var _hoisted_18 = {
   "class": "table"
 };
 
-var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("thead", null, [/*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("tr", null, [/*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("th", {
     scope: "col"
   }, "タイトル"), /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("th", {
@@ -23487,30 +23482,30 @@ var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_30 = {
+var _hoisted_20 = {
   "class": "btn-toolbar"
 };
-var _hoisted_31 = {
+var _hoisted_21 = {
   "class": "btn-group"
 };
-var _hoisted_32 = ["onClick", "disabled"];
-var _hoisted_33 = ["onClick", "disabled"];
-var _hoisted_34 = {
+var _hoisted_22 = ["onClick", "disabled"];
+var _hoisted_23 = ["onClick", "disabled"];
+var _hoisted_24 = {
   "class": "btn-toolbar"
 };
-var _hoisted_35 = {
+var _hoisted_25 = {
   "class": "btn-group"
 };
-var _hoisted_36 = {
+var _hoisted_26 = {
   "class": "prev-button"
 };
-var _hoisted_37 = {
+var _hoisted_27 = {
   "class": "next-button"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("div", _hoisted_1, [_hoisted_2, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_3, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_4, [_hoisted_5, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])(" " + Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])($data.message), 1
   /* TEXT */
-  )]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, [_hoisted_6, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
+  )]), _hoisted_6, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
     type: "text",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.title = $event;
@@ -23518,150 +23513,76 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "newtitle"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelText"], $data.title]])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, [_hoisted_7, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "文芸",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.category = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), _hoisted_8, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "実用書",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.category = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), _hoisted_9, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "ビジネス書",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.category = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), _hoisted_10, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "絵本/児童書",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.category = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), _hoisted_11, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "学習参考書/専門書",
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.category = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), _hoisted_12, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "コミック/雑誌",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return $data.category = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), _hoisted_13]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelText"], $data.title]]), _hoisted_7, (Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])(vue__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(vue__WEBPACK_IMPORTED_MODULE_0__["renderList"])($data.items, function (item) {
+    return Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("div", {
+      key: item.id
+    }, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
+      type: "radio",
+      name: "category",
+      value: item,
+      "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+        return $data.category = $event;
+      })
+    }, null, 8
+    /* PROPS */
+    , _hoisted_8), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(item), 1
+    /* TEXT */
+    )]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
     "class": "btn btn-primary",
-    onClick: _cache[7] || (_cache[7] = function () {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.addBook && $options.addBook.apply($options, arguments);
     }),
     id: "add",
     disabled: $data.isActive
   }, "追加", 8
   /* PROPS */
-  , _hoisted_14)]), $data.editFlg ? (Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("div", _hoisted_15, [_hoisted_16, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, [_hoisted_17, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
+  , _hoisted_9)]), $data.editFlg ? (Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("div", _hoisted_10, [_hoisted_11, _hoisted_12, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
     type: "text",
-    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.updateTitle = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelText"], $data.updateTitle]])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("p", null, [_hoisted_18, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "文芸",
-    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-      return $data.updateCategory = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.updateCategory]]), _hoisted_19, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "実用書",
-    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-      return $data.updateCategory = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.updateCategory]]), _hoisted_20, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "ビジネス書",
-    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-      return $data.updateCategory = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.updateCategory]]), _hoisted_21, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "絵本/児童書",
-    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-      return $data.updateCategory = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.updateCategory]]), _hoisted_22, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "学習参考書/専門書",
-    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-      return $data.updateCategory = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.updateCategory]]), _hoisted_23, Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
-    type: "radio",
-    name: "category",
-    value: "コミック/雑誌",
-    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-      return $data.updateCategory = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.updateCategory]]), _hoisted_24]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_25, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_26, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
-    onClick: _cache[15] || (_cache[15] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelText"], $data.updateTitle]]), _hoisted_13, (Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])(vue__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(vue__WEBPACK_IMPORTED_MODULE_0__["renderList"])($data.items, function (item) {
+    return Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("div", {
+      key: item.id
+    }, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("input", {
+      type: "radio",
+      name: "category",
+      value: item,
+      "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+        return $data.category = $event;
+      })
+    }, null, 8
+    /* PROPS */
+    , _hoisted_14), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(item), 1
+    /* TEXT */
+    )]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_15, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_16, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.updateBook($data.updateId);
     }),
     "class": "btn btn-primary",
     id: "update"
   }, "変更"), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
-    onClick: _cache[16] || (_cache[16] = function () {
+    onClick: _cache[6] || (_cache[6] = function () {
       return $options.updateCancel && $options.updateCancel.apply($options, arguments);
     }),
     "class": "btn btn-secondary",
     id: "cancel"
-  }, "キャンセル")])])])) : Object(vue__WEBPACK_IMPORTED_MODULE_0__["createCommentVNode"])("v-if", true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_27, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("table", _hoisted_28, [_hoisted_29, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("tbody", null, [(Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])(vue__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(vue__WEBPACK_IMPORTED_MODULE_0__["renderList"])($data.books, function (book) {
+  }, "キャンセル")])])])) : Object(vue__WEBPACK_IMPORTED_MODULE_0__["createCommentVNode"])("v-if", true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_17, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("table", _hoisted_18, [_hoisted_19, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("tbody", null, [(Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])(vue__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(vue__WEBPACK_IMPORTED_MODULE_0__["renderList"])($data.books, function (book) {
     return Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementBlock"])("tr", {
       key: book.id
     }, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("td", null, Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(book.title), 1
     /* TEXT */
     ), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("td", null, Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(book.category), 1
     /* TEXT */
-    ), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("td", null, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_30, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_31, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+    ), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("td", null, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_20, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_21, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
       onClick: function onClick($event) {
         return $options.updateForm(book.id, book.title, book.category);
       },
@@ -23670,7 +23591,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       disabled: $data.isActive
     }, "編集", 8
     /* PROPS */
-    , _hoisted_32), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+    , _hoisted_22), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
       onClick: function onClick($event) {
         return $options.deleteBook(book.id);
       },
@@ -23679,18 +23600,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       disabled: $data.isActive
     }, "削除", 8
     /* PROPS */
-    , _hoisted_33)])])])]);
+    , _hoisted_23)])])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_34, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_35, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_36, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
-    onClick: _cache[17] || (_cache[17] = function ($event) {
+  ))])])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_24, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_25, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_26, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+    onClick: _cache[7] || (_cache[7] = function ($event) {
       return $options.prevPage();
     }),
     "class": "btn"
   }, "<<前へ", 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vShow"], $data.isDisplayPrev]])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_37, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
-    onClick: _cache[18] || (_cache[18] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__["vShow"], $data.isDisplayPrev]])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("div", _hoisted_27, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["createElementVNode"])("button", {
+    onClick: _cache[8] || (_cache[8] = function ($event) {
       return $options.nextPage();
     }),
     "class": "btn"
