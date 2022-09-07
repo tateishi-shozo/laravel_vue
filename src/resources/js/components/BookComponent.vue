@@ -21,7 +21,7 @@
             <p>タイトル</p><input type="text" v-model="updateTitle">
             <p>カテゴリー</p>
                 <div v-for=" item in items" :key="item.id">
-                    <input type="radio" name="category" :value="item" v-model="category">{{item}}
+                    <input type="radio" name="category" :value="item" v-model="updateCategory">{{item}}
                 </div>
             <div class="btn-toolbar">
                 <div class="btn-group">
