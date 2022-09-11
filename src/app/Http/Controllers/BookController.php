@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class BookController extends Controller
 {
@@ -42,7 +43,8 @@ class BookController extends Controller
             \DB::commit();
         }catch(\Throwable $e){
             \DB::rollback();
-            throw $e;
+            // throw $e;
+            return [1, 2, 3];
         }
     }
 

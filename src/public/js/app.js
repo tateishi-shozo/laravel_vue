@@ -23211,47 +23211,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-
-                if (!(_this2.title == "" || _this2.category == "")) {
-                  _context2.next = 4;
-                  break;
-                }
-
-                _this2.message = "全て入力してください!!";
-                return _context2.abrupt("return");
-
-              case 4:
-                ;
-                _context2.next = 7;
+                _context2.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/books', {
                   title: _this2.title,
                   category: _this2.category,
                   read_flg: 0
                 });
 
-              case 7:
+              case 3:
                 _this2.getBook();
 
                 _this2.title = '';
                 _this2.category = '';
                 _this2.message = '新規追加しました!!';
-                _context2.next = 16;
+                _context2.next = 12;
                 break;
 
-              case 13:
-                _context2.prev = 13;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
-                _this2.message = _context2.t0;
 
-              case 16:
+                if (_context2.t0.response.data.errors.title !== null) {
+                  _this2.message = _context2.t0.response.data.errors.title[0];
+                } else if (_context2.t0.response.data.errors.category !== null) {
+                  _this2.message = _context2.t0.response.data.errors.category[0];
+                } else {
+                  _this2.message = _context2.t0;
+                }
+
+              case 12:
                 ;
 
-              case 17:
+              case 13:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 13]]);
+        }, _callee2, null, [[0, 9]]);
       }))();
     },
     //登録した本の削除
@@ -23554,11 +23550,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       name: "category",
       value: item,
       "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-        return $data.category = $event;
+        return $data.updateCategory = $event;
       })
     }, null, 8
     /* PROPS */
-    , _hoisted_14), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.category]]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(item), 1
+    , _hoisted_14), [[vue__WEBPACK_IMPORTED_MODULE_0__["vModelRadio"], $data.updateCategory]]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])(Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(item), 1
     /* TEXT */
     )]);
   }), 128

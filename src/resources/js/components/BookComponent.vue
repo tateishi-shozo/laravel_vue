@@ -132,15 +132,15 @@ export default {
                     console.log(error);
                     this.message = error;
                 };
-        },
+            },
 
         //本の新規登録
         async addBook() {
             try{
-                if( this.title == "" || this.category == ""){
-                    this.message = "全て入力してください!!";
-                    return
-                };
+                // if( this.title == "" || this.category == ""){
+                //     this.message = "全て入力してください!!";
+                //     return
+                // };
 
                 await axios.post('api/books',{
                     title: this.title,
@@ -154,7 +154,13 @@ export default {
                 this.message = '新規追加しました!!';
 
                 }catch(error){
-                    this.message = error;
+                    if(error.response.data.errors.title !== null){
+                        this.message = error.response.data.errors.title[0];
+                    }else if(error.response.data.errors.category !== null){
+                        this.message = error.response.data.errors.category[0];
+                    }else{
+                        this.message = error;
+                    }
                 };
         },
         

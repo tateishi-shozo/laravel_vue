@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class BookPost extends FormRequest
 {
@@ -27,6 +29,13 @@ class BookPost extends FormRequest
             'title' => 'required',
             'category' => 'required',
             'read_flg' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            '全て入力してください!!',
         ];
     }
 }
