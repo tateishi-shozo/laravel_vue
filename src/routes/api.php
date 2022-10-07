@@ -24,3 +24,5 @@ Route::get('/books', 'BookController@index');
 Route::delete('/destroy/{id}', 'BookController@destroy');
 
 Route::put('/update/{update}', 'BookController@update');
+
+Route::post('/login/{email}/{password}','Auth\LoginController@login');

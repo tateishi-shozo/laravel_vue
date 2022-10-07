@@ -3,13 +3,13 @@
  
 <head>
     <meta charset="UTF-8">
-    <title>SPAサンプル</title>
+    <title>ログイン</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
  
 <body>
-    <div class="bg-light" id="book">
-        <book-component></book-component>
+    <div class="bg-light" id="login">
+        <login-component></login-component>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
