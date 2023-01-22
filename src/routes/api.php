@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use Monolog\Handler\RotatingFileHandler;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +15,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::apiResource('/books','BookController');
 
-Route::get('/books', 'BookController@index');
+Route::middleware('auth:sanctum')->get('/books', 'BookController@index');
 
 Route::delete('/destroy/{id}', 'BookController@destroy');
 
 Route::put('/update/{update}', 'BookController@update');
 
-Route::post('/login/{email}/{password}','Auth\LoginController@login');
+Route::post('/register','AuthController@register');
+
+Route::post('/login','AuthController@login');

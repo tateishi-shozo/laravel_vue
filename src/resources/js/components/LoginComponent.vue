@@ -6,12 +6,11 @@
                 <div class="card-header">ログイン</div>
  
                 <div class="card-body">
-                    <form>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
  
                             <div class="col-md-6">
-                                <input id="email" type="email" v-model="email" class="form-control @error('email') is-invalid @enderror" name="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  v-model="email" name="email">
                             </div>
                         </div>
  
@@ -35,12 +34,11 @@
  
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" @click="login">ログイン</button>
+                                <button class="btn btn-primary" @click="login">ログイン</button>
  
                                 <a class="btn btn-link" href="https:google.com">パスワードを忘れましたか？</a>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -52,8 +50,10 @@
     export default {
         data() {
             return{
+                name:'',
                 email: '',
-                password: ''
+                password: '',
+                //remember: ''
             }
 
         },
@@ -61,12 +61,22 @@
             console.log('Component mounted.')
         },
         methods: {
-            login(){
-                const response = axios.post('api/login',{
+            async login(){
+                const response = await axios.post('api/login',{
+                    name: this.email,
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    // remember: true
+                }).then(function (response) {
+                    console.log(response);
+                    console.log(response.data.token_type);
+                    if(response.status = 200){
+                        const token = response.data.token_type + ' ' + response.data.access_token;
+                        console.log(token);
+                        localStorage.setItem('Authorization', token);
+                        location.href = '/index';
+                    }
                 });
-                console.log(response);
             }
         }
     }

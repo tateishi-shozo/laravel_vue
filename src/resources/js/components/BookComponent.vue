@@ -88,7 +88,7 @@ export default {
         };
     },
 
-    mounted: function() {
+    created: function() {
         this.getBook();
     },
 
@@ -96,7 +96,12 @@ export default {
         //登録した本の一覧表示
         async getBook(){
             try{
-                const response = await axios.get(`api/books?page=${this.current_page}`);
+                const token = localStorage.getItem('Authorization');
+                const response = await axios.get(`api/books?page=${this.current_page}`,{
+                    headers: {
+                        Authorization: token,
+                    }
+                });
                 const books = response.data;
                 console.log(response);
                 this.books = books.data;
