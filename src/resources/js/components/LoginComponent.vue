@@ -22,21 +22,11 @@
                             </div>
                         </div>
  
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
- 
-                                    <label class="form-check-label" for="remember">ログイン情報を保存する</label>
-                                </div>
-                            </div>
-                        </div>
- 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button class="btn btn-primary" @click="login">ログイン</button>
+                                <button class="btn btn-primary" @click="login()">ログイン</button>
  
-                                <a class="btn btn-link" href="https:google.com">パスワードを忘れましたか？</a>
+                                <a class="btn btn-link" @click="register()">新規登録の方はこちら</a>
                             </div>
                         </div>
                 </div>
@@ -53,7 +43,6 @@
                 name:'',
                 email: '',
                 password: '',
-                //remember: ''
             }
 
         },
@@ -66,8 +55,8 @@
                     name: this.email,
                     email: this.email,
                     password: this.password,
-                    // remember: true
-                }).then(function (response) {
+                }) ;
+                // .then(function (response) {
                     console.log(response);
                     console.log(response.data.token_type);
                     if(response.status = 200){
@@ -76,7 +65,7 @@
                         localStorage.setItem('Authorization', token);
                         location.href = '/index';
                     }
-                });
+                // });
             }
         }
     }

@@ -2,6 +2,7 @@
     <div class="bg-light">
         <div class="navbar navbar-light navbar-dark bg-dark">
             <h2 class="navbar-brand">MYライブラリー</h2>
+            <button @click="logout" class="btn btn-primary">ログアウト</button>
         </div>
         <div class="input-form">
             <div class="message">
@@ -14,7 +15,7 @@
                 <div v-for=" item in items" :key="item.id">
                     <input type="radio" name="category" :value="item" v-model="category">{{item}}
                 </div>
-            <button class="btn btn-primary" @click="addBook" id="add" :disabled="isActive">追加</button>
+            <button class="btn btn-primary" @click="addBook()" id="add" :disabled="isActive">追加</button>
         </div>
         <div class="edit-form" v-if="editFlg">
             <h3>編集フォーム</h3>
@@ -26,7 +27,7 @@
             <div class="btn-toolbar">
                 <div class="btn-group">
                     <button @click="updateBook(updateId)" class="btn btn-primary" id="update">変更</button>
-                    <button @click="updateCancel" class="btn btn-secondary" id="cancel">キャンセル</button>
+                    <button @click="updateCancel()" class="btn btn-secondary" id="cancel">キャンセル</button>
                 </div>
             </div>
         </div>        
@@ -140,15 +141,20 @@ export default {
         //本の新規登録
         async addBook() {
             try{
-                // if( this.title == "" || this.category == ""){
-                //     this.message = "全て入力してください!!";
-                //     return
-                // };
+                const token = localStorage.getItem('Authorization');
+                if( this.title == "" || this.category == ""){
+                    this.message = "全て入力してください!!";
+                    return
+                };
 
                 await axios.post('api/books',{
                     title: this.title,
                     category: this.category,
                     read_flg: 0
+                },{
+                    headers: {
+                        Authorization: token
+                    }
                 });
                 this.getBook();
 
@@ -170,8 +176,13 @@ export default {
         //登録した本の削除
         async deleteBook(id) {
             try{
+                const token = localStorage.getItem('Authorization');
                 const index = this.books.findIndex((book) => book.id === id );
-                await axios.delete('api/books/' + id);
+                await axios.delete('api/books/' + id,{
+                    headers: {
+                        Authorization: token,
+                    }
+                });
                 this.message = "削除しました!!";
                 this.getBook();
 
@@ -192,11 +203,16 @@ export default {
         //本の編集
         async updateBook(updateId) {
             try{
+                const token = localStorage.getItem('Authorization');
                 const index = this.books.findIndex((book) => book.id === updateId );
                 await axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
                     category: this.updateCategory,
                     read_flg: 0
+                },{
+                    headers: {
+                        Authorization: token
+                    }
                 });
 
                 this.getBook();
@@ -236,6 +252,22 @@ export default {
             const prev_page = this.current_page - 1;
             this.current_page = prev_page;
             this.getBook();
+        },
+
+        //ログアウト
+        async logout(){
+            try{
+                const token = localStorage.getItem('Authorization');
+                const response = await axios.get(`api/logout`,{
+                    headers: {
+                        Authorization: token,
+                    }
+                });
+                localStorage.removeItem('Authorization');
+                location.href = '/login';
+            }catch(error){
+                this.message = error;
+            }
         }
     }
 }

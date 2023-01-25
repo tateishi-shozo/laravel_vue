@@ -15,18 +15,16 @@ use Monolog\Handler\RotatingFileHandler;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    Route::apiResource('/books','BookController');
+
+    Route::get('/logout','AuthController@logout');
+
 });
-
-Route::apiResource('/books','BookController');
-
-Route::middleware('auth:sanctum')->get('/books', 'BookController@index');
-
-Route::delete('/destroy/{id}', 'BookController@destroy');
-
-Route::put('/update/{update}', 'BookController@update');
 
 Route::post('/register','AuthController@register');
 
 Route::post('/login','AuthController@login');
+
+//Route::get('/logout','AuthController@logout');

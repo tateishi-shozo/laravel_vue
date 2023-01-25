@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class AuthPost extends FormRequest
 {
@@ -28,5 +30,17 @@ class AuthPost extends FormRequest
             'email' => 'required',
             'password' => 'required',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        //$response['errors']  = $validator->errors()->toArray();
+        $response = response()->json([
+            'errors' => $validator->errors(),
+            'status' => 400, //jsonの返事の中身のエラー番号
+        ],400);
+            
+        return $response;
+        // throw new HttpResponseException($response);
     }
 }
