@@ -34,13 +34,11 @@ class AuthPost extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        //$response['errors']  = $validator->errors()->toArray();
-        $response = response()->json([
-            'errors' => $validator->errors(),
-            'status' => 400, //jsonの返事の中身のエラー番号
-        ],400);
-            
-        return $response;
-        // throw new HttpResponseException($response);
+
+      $response = response()->json(
+            $validator->errors(),
+            400);  
+        
+        throw new HttpResponseException($response);
     }
 }

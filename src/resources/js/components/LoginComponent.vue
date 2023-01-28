@@ -23,7 +23,13 @@
                         </div>
  
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="message" v-for="errorEmail in errorEmails" :key="email">
+                                {{errorEmail}}
+                            </div>
+                            <div class="message" v-for="errorPassword in errorPasswords" :key="password">
+                                {{errorPassword}}
+                            </div>
+                            <div class="col-md-8 offset-md-4 login">
                                 <button class="btn btn-primary" @click="login()">ログイン</button>
  
                                 <a class="btn btn-link" @click="register()">新規登録の方はこちら</a>
@@ -43,21 +49,19 @@
                 name:'',
                 email: '',
                 password: '',
+                errorEmails: '',
+                errorPasswords: ''
             }
 
         },
-        mounted() {
-            console.log('Component mounted.')
-        },
         methods: {
             async login(){
-                const response = await axios.post('api/login',{
+                try{
+                    const response = await axios.post('api/login',{
                     name: this.email,
                     email: this.email,
                     password: this.password,
-                }) ;
-                // .then(function (response) {
-                    console.log(response);
+                });
                     console.log(response.data.token_type);
                     if(response.status = 200){
                         const token = response.data.token_type + ' ' + response.data.access_token;
@@ -65,9 +69,20 @@
                         localStorage.setItem('Authorization', token);
                         location.href = '/index';
                     }
-                // });
+                }catch(error){
+                    console.log(error.response);
+                    this.errorEmails ='';
+                    this.errorPasswords ='';
+
+                    this.errorEmails = error.response.data.email;
+                    this.errorPasswords = error.response.data.password;
+                };
             }
         }
     }
 </script>
-
+<style scoped lang="scss">
+.login{
+    margin-top:10px;
+}
+</style>
