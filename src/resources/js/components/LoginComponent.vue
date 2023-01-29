@@ -10,7 +10,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
  
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  v-model="email" name="email">
+                                <input id="email" type="email" class="form-control"  v-model="email" name="email">
                             </div>
                         </div>
  
@@ -18,21 +18,21 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
  
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" v-model="password" name="password">
+                                <input id="password" type="password" class="form-control" v-model="password" name="password">
                             </div>
                         </div>
  
                         <div class="form-group row mb-0">
-                            <div class="message" v-for="errorEmail in errorEmails" :key="email">
+                            <div class="message" v-for="(errorEmail,index) in errorEmails" :key="index">
                                 {{errorEmail}}
                             </div>
-                            <div class="message" v-for="errorPassword in errorPasswords" :key="password">
+                            <div class="message" v-for="(errorPassword,index) in errorPasswords" :key="index">
                                 {{errorPassword}}
                             </div>
                             <div class="col-md-8 offset-md-4 login">
                                 <button class="btn btn-primary" @click="login()">ログイン</button>
  
-                                <a class="btn btn-link" @click="register()">新規登録の方はこちら</a>
+                                <a class="btn btn-link" @click="registerLink()">新規登録の方はこちら</a>
                             </div>
                         </div>
                 </div>
@@ -77,12 +77,18 @@
                     this.errorEmails = error.response.data.email;
                     this.errorPasswords = error.response.data.password;
                 };
+            },
+            registerLink(){
+                location.href = '/register';
             }
         }
     }
 </script>
 <style scoped lang="scss">
 .login{
+    margin-top:10px;
+}
+.form-group{
     margin-top:10px;
 }
 </style>

@@ -15,18 +15,31 @@ class AuthController extends Controller
     //ユーザー登録
     public function register(AuthPost $request){
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+        $user_email = User::where('email',$request->email)->first();
 
-        $token = $user -> createToken('auth_token') -> plainTextToken;
+        if($user_email == null ){
 
-        return response() -> json([
-            'access_token' => $token,
-            'token_type' => 'Bearer'
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+    
+            $token = $user -> createToken('auth_token') -> plainTextToken;
+    
+            return response() -> json([
+                'access_token' => $token,
+                'token_type' => 'Bearer'
+            ]);
+            
+        }else{
+            $response = response()->json([
+                'email' => ['このメールアドレスは既に登録されています']
+            ],400);
+
+            throw new HttpResponseException($response);
+
+        };
     }
 
     //ログイン

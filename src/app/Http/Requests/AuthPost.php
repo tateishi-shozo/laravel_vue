@@ -32,6 +32,20 @@ class AuthPost extends FormRequest
         ];
     }
 
+    /**
+     * 定義済みバリデーションルールのエラーメッセージ取得
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => '名前を入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'password.required' => 'パスワードを入力してください',
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
 

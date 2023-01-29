@@ -2,7 +2,7 @@
     <div class="bg-light">
         <div class="navbar navbar-light navbar-dark bg-dark">
             <h2 class="navbar-brand">MYライブラリー</h2>
-            <button @click="logout" class="btn btn-primary">ログアウト</button>
+            <button @click="logout()" class="btn btn-primary">ログアウト</button>
         </div>
         <div class="input-form">
             <div class="message">
