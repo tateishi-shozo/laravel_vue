@@ -22832,46 +22832,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var token;
+        var token, user_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
                 token = localStorage.getItem('Authorization');
+                user_id = localStorage.getItem('user_id');
 
                 if (!(_this2.title == "" || _this2.category == "")) {
-                  _context2.next = 5;
+                  _context2.next = 6;
                   break;
                 }
 
                 _this2.message = "全て入力してください!!";
                 return _context2.abrupt("return");
 
-              case 5:
+              case 6:
                 ;
-                _context2.next = 8;
+                _context2.next = 9;
                 return axios.post('api/books', {
                   title: _this2.title,
                   category: _this2.category,
-                  read_flg: 0
+                  user_id: user_id
                 }, {
                   headers: {
                     Authorization: token
                   }
                 });
 
-              case 8:
+              case 9:
                 _this2.getBook();
 
                 _this2.title = '';
                 _this2.category = '';
                 _this2.message = '新規追加しました!!';
-                _context2.next = 17;
+                _context2.next = 18;
                 break;
 
-              case 14:
-                _context2.prev = 14;
+              case 15:
+                _context2.prev = 15;
                 _context2.t0 = _context2["catch"](0);
 
                 if (_context2.t0.response.data.errors.title !== null) {
@@ -22882,15 +22883,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.message = _context2.t0;
                 }
 
-              case 17:
+              case 18:
                 ;
 
-              case 18:
+              case 19:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 14]]);
+        }, _callee2, null, [[0, 15]]);
       }))();
     },
     //登録した本の削除
@@ -22965,8 +22966,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context4.next = 5;
                 return axios.put('api/books/' + updateId, {
                   title: _this4.updateTitle,
-                  category: _this4.updateCategory,
-                  read_flg: 0
+                  category: _this4.updateCategory
                 }, {
                   headers: {
                     Authorization: token
@@ -23099,7 +23099,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response, token;
+        var response, token, user_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -23107,7 +23107,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 0;
                 _context.next = 3;
                 return axios.post('api/login', {
-                  name: _this.email,
+                  name: 'name',
                   email: _this.email,
                   password: _this.password
                 });
@@ -23118,8 +23118,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status = 200) {
                   token = response.data.token_type + ' ' + response.data.access_token;
+                  user_id = response.data.user_id;
                   console.log(token);
                   localStorage.setItem('Authorization', token);
+                  localStorage.setItem('user_id', user_id);
                   location.href = '/index';
                 }
 

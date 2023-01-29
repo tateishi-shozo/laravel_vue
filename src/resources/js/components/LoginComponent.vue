@@ -58,15 +58,17 @@
             async login(){
                 try{
                     const response = await axios.post('api/login',{
-                    name: this.email,
+                    name: 'name',
                     email: this.email,
                     password: this.password,
                 });
                     console.log(response.data.token_type);
                     if(response.status = 200){
                         const token = response.data.token_type + ' ' + response.data.access_token;
+                        const user_id = response.data.user_id
                         console.log(token);
                         localStorage.setItem('Authorization', token);
+                        localStorage.setItem('user_id', user_id);
                         location.href = '/index';
                     }
                 }catch(error){

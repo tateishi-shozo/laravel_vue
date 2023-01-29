@@ -27,8 +27,7 @@ class BookPost extends FormRequest
     {
         return [
             'title' => 'required',
-            'category' => 'required',
-            'read_flg' => 'required',
+            'category' => 'required'
         ];
     }
 

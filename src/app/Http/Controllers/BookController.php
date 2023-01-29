@@ -43,8 +43,7 @@ class BookController extends Controller
             \DB::commit();
         }catch(\Throwable $e){
             \DB::rollback();
-            // throw $e;
-            return [1, 2, 3];
+            throw $e;
         }
     }
 

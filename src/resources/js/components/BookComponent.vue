@@ -142,6 +142,7 @@ export default {
         async addBook() {
             try{
                 const token = localStorage.getItem('Authorization');
+                const user_id = localStorage.getItem('user_id');
                 if( this.title == "" || this.category == ""){
                     this.message = "全て入力してください!!";
                     return
@@ -150,7 +151,7 @@ export default {
                 await axios.post('api/books',{
                     title: this.title,
                     category: this.category,
-                    read_flg: 0
+                    user_id: user_id
                 },{
                     headers: {
                         Authorization: token
@@ -207,8 +208,7 @@ export default {
                 const index = this.books.findIndex((book) => book.id === updateId );
                 await axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
-                    category: this.updateCategory,
-                    read_flg: 0
+                    category: this.updateCategory
                 },{
                     headers: {
                         Authorization: token
