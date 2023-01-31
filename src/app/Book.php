@@ -11,4 +11,8 @@ class Book extends Model
         'title',
         'user_id'
     ];
+
+    public function users(){
+        return $this->belongsToMany('App\User') -> withPivot('comment');
+    }
 }

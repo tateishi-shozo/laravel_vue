@@ -21,8 +21,13 @@ class BookController extends Controller
     public function index()
     {
         try{
-            $books = DB::table('books')->paginate(5);
+            //多分いらない
+            // $books = DB::table('books')->paginate(5);
+            // return $books;
+            
+            $books = Book::paginate(5);
             return $books;
+
         }catch(\Throwable $e){
             throw $e;
         }
@@ -70,7 +75,7 @@ class BookController extends Controller
         try{
             \DB::beginTransaction();
             $book = Book::findOrFail($id);
-            $book -> fill(['category' => $request->category,'read_flg' => $request->read_flg,'title' => $request->title]);
+            $book -> fill(['category' => $request->category,'title' => $request->title]);
             $book -> saveOrFail();
             \DB::commit();
             

@@ -17,12 +17,26 @@ use Monolog\Handler\RotatingFileHandler;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::apiResource('/books','BookController');
+    //本の投稿系
+    Route::post('/books','BookController@store');
+    Route::put('/books/{update}','BookController@update');
+    Route::delete('/books/{id}','BookController@destroy');
 
+    // //コメントの投稿系
+    // Route::post('/books/comments','CommentController@create');
+
+    //ログアウト
     Route::get('/logout','AuthController@logout');
-
 });
 
-Route::post('/register','AuthController@register');
+//コメントの投稿系
+Route::post('/books/comments','CommentController@create');
 
+//本・コメント閲覧
+Route::get('/books','BookController@index');
+    Route::delete('/books/{id}','BookController@destroy');
+    Route::get('/books/comments/{id}','CommentController@show');
+
+//ログイン・ユーザー登録
+Route::post('/register','AuthController@register');
 Route::post('/login','AuthController@login');

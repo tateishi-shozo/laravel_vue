@@ -2,20 +2,26 @@
     <div class="bg-light">
         <div class="navbar navbar-light navbar-dark bg-dark">
             <h2 class="navbar-brand">MYライブラリー</h2>
-            <button @click="logout()" class="btn btn-primary">ログアウト</button>
-        </div>
-        <div class="input-form">
-            <div class="message">
-                <h3>新規登録</h3>
-                {{ message }}
+            <div class="logout" v-if="token !== null">
+                <h4 class="user_name navbar-brand">{{ user_name }}さん</h4>
+                <button @click="addForm()" class="btn btn-primary" :disabled="isActive">新規投稿</button>
+                <button @click="logout()" class="btn btn-primary">ログアウト</button>
             </div>
+            <div class="login" v-else>
+                <h4 class="user_name navbar-brand">ゲストさん</h4>
+                <button @click="loginLink()" class="btn btn-primary">ログイン</button>
+            </div>
+        </div>
+        <div class="input-form" v-if="addFlg">
+            <h3>新規登録</h3>
             <p>タイトル</p>
             <input type="text" v-model="title" id="newtitle">
             <p>カテゴリー</p>
                 <div v-for=" item in items" :key="item.id">
                     <input type="radio" name="category" :value="item" v-model="category">{{item}}
                 </div>
-            <button class="btn btn-primary" @click="addBook()" id="add" :disabled="isActive">追加</button>
+            <button  @click="addBook()" class="btn btn-primary" id="add">追加</button>
+            <button @click="addCancel()" class="btn btn-secondary" id="cancel">キャンセル</button>
         </div>
         <div class="edit-form" v-if="editFlg">
             <h3>編集フォーム</h3>
@@ -25,12 +31,13 @@
                     <input type="radio" name="category" :value="item" v-model="updateCategory">{{item}}
                 </div>
             <div class="btn-toolbar">
-                <div class="btn-group">
-                    <button @click="updateBook(updateId)" class="btn btn-primary" id="update">変更</button>
-                    <button @click="updateCancel()" class="btn btn-secondary" id="cancel">キャンセル</button>
-                </div>
+                <button @click="updateBook(updateId)" class="btn btn-primary" id="update">変更</button>
+                <button @click="updateCancel()" class="btn btn-secondary" id="cancel">キャンセル</button>
             </div>
-        </div>        
+        </div>
+        <div class="message">
+            {{ message }}
+        </div>
         <div class="bg-light">
             <table class="table">
             <thead>
@@ -44,11 +51,9 @@
                 <td>{{ book.title }}</td>
                 <td>{{ book.category }}</td>
                 <td>
-                    <div class="btn-toolbar">
-                        <div class="btn-group">
-                            <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit" :disabled="isActive">編集</button>
-                            <button @click="deleteBook(book.id)" class="btn btn-danger" id="delete" :disabled="isActive">削除</button>
-                        </div>
+                    <div class="btn-toolbar" v-if="book.user_id == user_id">
+                        <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit" :disabled="isActive">編集</button>
+                        <button @click="deleteBook(book.id)" class="btn btn-danger" id="delete" :disabled="isActive">削除</button>
                     </div>
                 </td>
                 </tr>
@@ -56,13 +61,11 @@
             </table>
         </div>
         <div class="btn-toolbar">
-            <div class="btn-group">
-                <div class="prev-button">
-                    <button @click="prevPage()" v-show="isDisplayPrev" class="btn">&lt;&lt;前へ</button>
-                </div>
-                <div class="next-button">
-                    <button @click="nextPage()" v-show="isDisplayNext" class="btn">次へ&gt;&gt;</button>
-                </div>
+            <div class="prev-button">
+                <button @click="prevPage()" v-show="isDisplayPrev" class="btn">&lt;&lt;前へ</button>
+            </div>
+            <div class="next-button">
+                <button @click="nextPage()" v-show="isDisplayNext" class="btn">次へ&gt;&gt;</button>
             </div>
         </div>
     </div>
@@ -85,11 +88,18 @@ export default {
             last_page: '',
             isDisplayPrev: false,
             isDisplayNext: true,
-            items: ["文芸","実用書","ビジネス書","絵本/児童書","学習参考書/専門書","コミック/雑誌"]
+            items: ["文芸","実用書","ビジネス書","絵本/児童書","学習参考書/専門書","コミック/雑誌"],
+            token: '',
+            user_id: '',
+            user_name: '',
+            addFlg: false
         };
     },
 
     created: function() {
+        this.token = localStorage.getItem('Authorization');
+        this.user_id = localStorage.getItem('user_id');
+        this.user_name = localStorage.getItem('user_name');
         this.getBook();
     },
 
@@ -97,12 +107,7 @@ export default {
         //登録した本の一覧表示
         async getBook(){
             try{
-                const token = localStorage.getItem('Authorization');
-                const response = await axios.get(`api/books?page=${this.current_page}`,{
-                    headers: {
-                        Authorization: token,
-                    }
-                });
+                const response = await axios.get(`api/books?page=${this.current_page}`);
                 const books = response.data;
                 console.log(response);
                 this.books = books.data;
@@ -141,8 +146,6 @@ export default {
         //本の新規登録
         async addBook() {
             try{
-                const token = localStorage.getItem('Authorization');
-                const user_id = localStorage.getItem('user_id');
                 if( this.title == "" || this.category == ""){
                     this.message = "全て入力してください!!";
                     return
@@ -151,10 +154,10 @@ export default {
                 await axios.post('api/books',{
                     title: this.title,
                     category: this.category,
-                    user_id: user_id
+                    user_id: this.user_id
                 },{
                     headers: {
-                        Authorization: token
+                        Authorization: this.token
                     }
                 });
                 this.getBook();
@@ -162,6 +165,8 @@ export default {
                 this.title = '';
                 this.category = '';
                 this.message = '新規追加しました!!';
+                this.addFlg = false;
+                this.isActive= false;
 
                 }catch(error){
                     if(error.response.data.errors.title !== null){
@@ -177,11 +182,10 @@ export default {
         //登録した本の削除
         async deleteBook(id) {
             try{
-                const token = localStorage.getItem('Authorization');
                 const index = this.books.findIndex((book) => book.id === id );
                 await axios.delete('api/books/' + id,{
                     headers: {
-                        Authorization: token,
+                        Authorization: this.token,
                     }
                 });
                 this.message = "削除しました!!";
@@ -199,19 +203,19 @@ export default {
             this.updateCategory = category;
             this.updateId = id;
             this.isActive= true;
+            this.message = '';
         },
 
         //本の編集
         async updateBook(updateId) {
             try{
-                const token = localStorage.getItem('Authorization');
                 const index = this.books.findIndex((book) => book.id === updateId );
                 await axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
                     category: this.updateCategory
                 },{
                     headers: {
-                        Authorization: token
+                        Authorization: this.token
                     }
                 });
 
@@ -257,17 +261,40 @@ export default {
         //ログアウト
         async logout(){
             try{
-                const token = localStorage.getItem('Authorization');
                 const response = await axios.get(`api/logout`,{
                     headers: {
-                        Authorization: token,
+                        Authorization: this.token,
                     }
                 });
                 localStorage.removeItem('Authorization');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('user_name');
                 location.href = '/login';
             }catch(error){
                 this.message = error;
             }
+        },
+
+        //ログインへ
+        loginLink(){
+            try{
+                location.href = '/login';
+            }catch(error){
+                this.message = error;
+            }
+        },
+
+        //新規投稿
+        addForm(){
+            this.addFlg = true;
+            this.isActive= true;
+            this.message = '';
+        },
+
+        //新規投稿キャンセル
+        addCancel(){
+            this.addFlg = false;
+            this.isActive= false;
         }
     }
 }
@@ -280,6 +307,14 @@ export default {
 
 .edit-form {
     margin-left : 30px;
+}
+
+.btn{
+    margin:0 10px;
+}
+
+.logout,.login{
+    display:flex;
 }
 
 </style>

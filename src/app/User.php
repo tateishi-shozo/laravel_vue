@@ -37,4 +37,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function books(){
+        return $this->belongsToMany('App\Book') -> withPivot('comment');
+    }
 }

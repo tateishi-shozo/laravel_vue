@@ -1,5 +1,9 @@
 <template>
-<div class="container">
+<div class="login-form">
+    <div class="navbar navbar-light navbar-dark bg-dark">
+        <h2 class="navbar-brand">MYライブラリー</h2>
+        <a class="btn btn-link" @click="indexLink()">ログインせずに利用する</a>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -65,10 +69,12 @@
                     console.log(response.data.token_type);
                     if(response.status = 200){
                         const token = response.data.token_type + ' ' + response.data.access_token;
-                        const user_id = response.data.user_id
+                        const user_id = response.data.user_id;
+                        const user_name = response.data.user_name;
                         console.log(token);
                         localStorage.setItem('Authorization', token);
                         localStorage.setItem('user_id', user_id);
+                        localStorage.setItem('user_name', user_name);
                         location.href = '/index';
                     }
                 }catch(error){
@@ -82,6 +88,12 @@
             },
             registerLink(){
                 location.href = '/register';
+            },
+            indexLink(){
+                localStorage.removeItem('Authorization');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('user_name');
+                location.href = '/index';
             }
         }
     }
@@ -92,5 +104,8 @@
 }
 .form-group{
     margin-top:10px;
+}
+.card{
+    margin:10px 0;
 }
 </style>

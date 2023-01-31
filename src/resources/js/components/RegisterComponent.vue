@@ -1,5 +1,9 @@
 <template>
-<div class="container">
+<div class="register-form">
+    <div class="navbar navbar-light navbar-dark bg-dark">
+        <h2 class="navbar-brand">MYライブラリー</h2>
+        <a class="btn btn-link" @click="indexLink()">ログインせずに利用する</a>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -95,6 +99,12 @@
             },
             loginLink(){
                 location.href = '/login';
+            },
+            indexLink(){
+                localStorage.removeItem('Authorization');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('user_name');
+                location.href = '/index';
             }
         }
     }

@@ -25,14 +25,6 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password)
             ]);
 
-            //ログイン画面に戻すので不要な気がする
-            // $token = $user -> createToken('auth_token') -> plainTextToken;
-    
-            // return response() -> json([
-            //     'access_token' => $token,
-            //     'token_type' => 'Bearer'
-            // ]);
-
         }else{
             $response = response()->json([
                 'email' => ['このメールアドレスは既に登録されています']
@@ -60,11 +52,13 @@ class AuthController extends Controller
         if(Hash::check($password, $user->password)){
             $token = $user->createToken('auth_token')->plainTextToken;
             $user_id = $user->id;
+            $user_name = $user->name;
             
             return response()->json([
                         'access_token' => $token,
                         'token_type' => 'Bearer',
-                        'user_id' => $user_id
+                        'user_id' => $user_id,
+                        'user_name' => $user_name
             ]);
 
         }else{
