@@ -19,7 +19,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //本の投稿系
     Route::post('/books','BookController@store');
-    Route::put('/books/{update}','BookController@update');
+    Route::put('/books/{id}','BookController@update');
     Route::delete('/books/{id}','BookController@destroy');
 
     // //コメントの投稿系
@@ -29,13 +29,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout','AuthController@logout');
 });
 
-//コメントの投稿系
-Route::post('/books/comments','CommentController@create');
+//コメント
+Route::get('/book/comment/{id}','CommentController@show');
+Route::post('/book/comment','CommentController@create');
+Route::delete('/book/comment/{id}','CommentController@destroy');
 
-//本・コメント閲覧
+//本
 Route::get('/books','BookController@index');
-    Route::delete('/books/{id}','BookController@destroy');
-    Route::get('/books/comments/{id}','CommentController@show');
+Route::get('/book/{id}','BookController@show');
+Route::delete('/books/{id}','BookController@destroy');
 
 //ログイン・ユーザー登録
 Route::post('/register','AuthController@register');

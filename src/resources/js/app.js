@@ -7,6 +7,7 @@
 require('./bootstrap');
 import { createApp } from 'vue/dist/vue.esm-bundler';
 import BookComponent from './components/BookComponent.vue';
+import CommentComponent from './components/CommentComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
 
@@ -37,5 +38,6 @@ window.Vue = require('vue');
  */
 
  createApp(BookComponent).mount('#book');
+ createApp(CommentComponent).mount('#comment');
  createApp(LoginComponent).mount('#login');
  createApp(RegisterComponent).mount('#register');

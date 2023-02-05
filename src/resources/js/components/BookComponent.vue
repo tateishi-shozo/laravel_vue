@@ -40,24 +40,29 @@
         </div>
         <div class="bg-light">
             <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">タイトル</th>
-                <th scope="col">カテゴリー</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="book in books" :key="book.id">
-                <td>{{ book.title }}</td>
-                <td>{{ book.category }}</td>
-                <td>
-                    <div class="btn-toolbar" v-if="book.user_id == user_id">
-                        <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit" :disabled="isActive">編集</button>
-                        <button @click="deleteBook(book.id)" class="btn btn-danger" id="delete" :disabled="isActive">削除</button>
-                    </div>
-                </td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr>
+                    <th scope="col">タイトル</th>
+                    <th scope="col">カテゴリー</th>
+                    <th scope="col">投稿者</th>
+                    <th scope="col">投稿時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="book in books" :key="book.id">
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.category }}</td>
+                        <td>{{ book.user_name }}</td>
+                        <td>{{ book.updated_at }}</td>
+                        <td><button @click="getComment(book.id)">コメント({{ book.comments_count }})</button></td>
+                        <td>
+                            <div class="btn-toolbar" v-if="book.user_id == user_id">
+                                <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit" :disabled="isActive">編集</button>
+                                <button @click="deleteBook(book.id)" class="btn btn-danger" id="delete" :disabled="isActive">削除</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <div class="btn-toolbar">
@@ -92,7 +97,9 @@ export default {
             token: '',
             user_id: '',
             user_name: '',
-            addFlg: false
+            addFlg: false,
+            comments: [],
+            commentFlg: false
         };
     },
 
@@ -100,12 +107,12 @@ export default {
         this.token = localStorage.getItem('Authorization');
         this.user_id = localStorage.getItem('user_id');
         this.user_name = localStorage.getItem('user_name');
-        this.getBook();
+        this.getBooks();
     },
 
     methods: {
         //登録した本の一覧表示
-        async getBook(){
+        async getBooks(){
             try{
                 const response = await axios.get(`api/books?page=${this.current_page}`);
                 const books = response.data;
@@ -160,11 +167,10 @@ export default {
                         Authorization: this.token
                     }
                 });
-                this.getBook();
+                this.getBooks();
 
                 this.title = '';
                 this.category = '';
-                this.message = '新規追加しました!!';
                 this.addFlg = false;
                 this.isActive= false;
 
@@ -182,14 +188,12 @@ export default {
         //登録した本の削除
         async deleteBook(id) {
             try{
-                const index = this.books.findIndex((book) => book.id === id );
                 await axios.delete('api/books/' + id,{
                     headers: {
                         Authorization: this.token,
                     }
                 });
-                this.message = "削除しました!!";
-                this.getBook();
+                this.getBooks();
 
                 }catch(error){
                     this.message = error;
@@ -209,7 +213,6 @@ export default {
         //本の編集
         async updateBook(updateId) {
             try{
-                const index = this.books.findIndex((book) => book.id === updateId );
                 await axios.put('api/books/' + updateId ,{
                     title: this.updateTitle,
                     category: this.updateCategory
@@ -219,9 +222,7 @@ export default {
                     }
                 });
 
-                this.getBook();
-
-                this.message = "変更しました!!";
+                this.getBooks();
 
                 }catch(error){
                     this.message = error;
@@ -241,21 +242,20 @@ export default {
             this.updateTitle = '';
             this.updateCategory = '';
             this.updateId = '';
-            this.isActive= false;
-            this.message = "キャンセルしました!!";         
+            this.isActive= false;  
         },
 
         //ページネーション
         nextPage(){
             const next_page = this.current_page + 1;
             this.current_page = next_page;
-            this.getBook();
+            this.getBooks();
         },
 
         prevPage(){
             const prev_page = this.current_page - 1;
             this.current_page = prev_page;
-            this.getBook();
+            this.getBooks();
         },
 
         //ログアウト
@@ -295,6 +295,16 @@ export default {
         addCancel(){
             this.addFlg = false;
             this.isActive= false;
+        },
+
+        //コメント閲覧
+        async getComment(id){
+            try{
+                location.href = '/comment?book_id=' + id;
+
+            }catch(error){
+                this.message = error;
+            }
         }
     }
 }

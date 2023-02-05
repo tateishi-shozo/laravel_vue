@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookPost;
 use App\Book;
+use App\User;
 use App\Http\Controllers\Controller;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
@@ -21,11 +22,24 @@ class BookController extends Controller
     public function index()
     {
         try{
-            //多分いらない
-            // $books = DB::table('books')->paginate(5);
-            // return $books;
-            
             $books = Book::paginate(5);
+            $count = $books->count();
+
+            for($i = 0 ; $i < $count ; $i ++){
+
+                $book_id = $books[$i]->id;
+                $user_id = $books[$i]->user_id;
+
+                $book = Book::find($book_id);
+                $comments_count = $book -> users() -> count();
+                $books[$i]['comments_count'] = $comments_count;
+
+                $user = User::find($user_id);
+                $user_name = $user -> name;
+                $books[$i]['user_name'] = $user_name;
+
+            };
+
             return $books;
 
         }catch(\Throwable $e){
@@ -60,7 +74,20 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $book = Book::find($id);
+
+            $user_id = $book -> user_id;
+
+            $user = User::find($user_id);
+            $user_name = $user -> name;
+            $book['user_name'] = $user_name;
+
+            return $book;
+
+        }catch(\Throwable $e){
+            throw $e;
+        }
     }
 
     /**

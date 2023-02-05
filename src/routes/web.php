@@ -16,7 +16,11 @@ Route::get('/home', function () {
 });
 
 Route::get('/index', function () {
-    return view('/index');
+    return view('index');
+});
+
+Route::get('/comment', function () {
+    return view('comment');
 });
 
 Route::get('/login',function(){
@@ -26,6 +30,3 @@ Route::get('/login',function(){
 Route::get('/register',function(){
     return view('auth.register');
 });
-
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\BookUser;
 use App\User;
 use App\Http\Requests\CommentPost;
 
@@ -59,10 +60,17 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $book = Book::find($id);
-        $comments = $book -> users() -> get();
-        
-        return $comments;
+        try{
+
+            $book = Book::find($id);
+            $comments = $book -> users() -> get();
+            
+            return $comments;
+
+        }catch(\Throwable $e){
+            throw $e;
+        };
+
     }
 
     /**
@@ -96,6 +104,10 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            BookUser::destroy($id);
+        }catch(\Throwable $e){
+            throw $e;
+        }
     }
 }
