@@ -2,6 +2,10 @@
     <div class="bg-light">
         <div class="navbar navbar-light navbar-dark bg-dark">
             <h2 class="navbar-brand">MYライブラリー</h2>
+            <div class="search">
+                <input type="text" v-model="search">
+                <button  @click="searchBook()" class="btn btn-primary" id="search">検索</button>
+            </div>
             <div class="logout" v-if="token !== null">
                 <h4 class="user_name navbar-brand">{{ user_name }}さん</h4>
                 <button @click="addForm()" class="btn btn-primary" :disabled="isActive">新規投稿</button>
@@ -21,7 +25,7 @@
                     <input type="radio" name="category" :value="item" v-model="category">{{item}}
                 </div>
             <button  @click="addBook()" class="btn btn-primary" id="add">追加</button>
-            <button @click="addCancel()" class="btn btn-secondary" id="cancel">キャンセル</button>
+            <button @click="reset()" class="btn btn-secondary" id="cancel">キャンセル</button>
         </div>
         <div class="edit-form" v-if="editFlg">
             <h3>編集フォーム</h3>
@@ -32,7 +36,18 @@
                 </div>
             <div class="btn-toolbar">
                 <button @click="updateBook(updateId)" class="btn btn-primary" id="update">変更</button>
-                <button @click="updateCancel()" class="btn btn-secondary" id="cancel">キャンセル</button>
+                <button @click="reset()" class="btn btn-secondary" id="cancel">キャンセル</button>
+            </div>
+        </div>
+        <div class="btn-toolbar">
+            <div class="prev-button" v-if="this.prev_page_url">
+                <button @click="prevPage()" class="btn">&lt;&lt;前へ</button>
+            </div>
+            <div class="next-button" v-if="this.next_page_url">
+                <button @click="nextPage()" class="btn">次へ&gt;&gt;</button>
+            </div>
+            <div class="returnIndex-button" v-if="this.searchFlg">
+                <button @click="returnIndex()" class="btn">&lt;&lt;一覧に戻る</button>
             </div>
         </div>
         <div class="message">
@@ -65,14 +80,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="btn-toolbar">
-            <div class="prev-button">
-                <button @click="prevPage()" v-show="isDisplayPrev" class="btn">&lt;&lt;前へ</button>
-            </div>
-            <div class="next-button">
-                <button @click="nextPage()" v-show="isDisplayNext" class="btn">次へ&gt;&gt;</button>
-            </div>
-        </div>
     </div>
 </template>
 <script>
@@ -90,16 +97,17 @@ export default {
             books: [],
             isActive: false,
             current_page: 1,
-            last_page: '',
-            isDisplayPrev: false,
-            isDisplayNext: true,
+            prev_page_url: '',
+            next_page_url: '',
             items: ["文芸","実用書","ビジネス書","絵本/児童書","学習参考書/専門書","コミック/雑誌"],
             token: '',
             user_id: '',
             user_name: '',
             addFlg: false,
             comments: [],
-            commentFlg: false
+            commentFlg: false,
+            search: '',
+            searchFlg: false
         };
     },
 
@@ -118,31 +126,10 @@ export default {
                 const books = response.data;
                 console.log(response);
                 this.books = books.data;
+
                 this.current_page = books.current_page;
-                this.last_page = books.last_page;
-
-                if(this.current_page >= this.last_page){
-                    this.isDisplayNext = false;
-
-                    if(this.current_page <= 1){
-                        this.isDisplayPrev = false;
-                    }else{
-                        this.isDisplayPrev = true;
-                    }
-
-                }else if(this.current_page <= 1){
-                    this.isDisplayPrev = false;
-                    
-                    if(this.current_page >= this.last_page){
-                        this.isDisplayNext = false;
-                    }else{
-                        this.isDisplayNext = true;
-                    }
-
-                }else{
-                    this.isDisplayNext = true;
-                    this.isDisplayPrev = true;
-                };
+                this.prev_page_url = books.prev_page_url;
+                this.next_page_url = books.next_page_url;
 
                 }catch(error){
                     console.log(error);
@@ -167,12 +154,8 @@ export default {
                         Authorization: this.token
                     }
                 });
+                this.reset();
                 this.getBooks();
-
-                this.title = '';
-                this.category = '';
-                this.addFlg = false;
-                this.isActive= false;
 
                 }catch(error){
                     if(error.response.data.errors.title !== null){
@@ -222,40 +205,45 @@ export default {
                     }
                 });
 
+                this.reset();
                 this.getBooks();
 
                 }catch(error){
                     this.message = error;
                 };
-
-                this.editFlg = false;
-                this.updateTitle = '';
-                this.updateCategory = '';
-                this.updateId = '';
-                this.isActive= false;
-
-        },
-
-        //本の編集のキャンセル
-        updateCancel() {
-            this.editFlg = false;
-            this.updateTitle = '';
-            this.updateCategory = '';
-            this.updateId = '';
-            this.isActive= false;  
         },
 
         //ページネーション
-        nextPage(){
-            const next_page = this.current_page + 1;
-            this.current_page = next_page;
-            this.getBooks();
+        async nextPage(){
+            try{
+                const response = await axios.get(this.next_page_url);
+                const books = response.data;
+                console.log(response);
+                this.books = books.data;
+
+                this.current_page = books.current_page;
+                this.prev_page_url = books.prev_page_url;
+                this.next_page_url = books.next_page_url;
+
+            }catch(error){
+                this.message = error;
+            }
         },
 
-        prevPage(){
-            const prev_page = this.current_page - 1;
-            this.current_page = prev_page;
-            this.getBooks();
+        async prevPage(){
+            try{
+                const response = await axios.get(this.prev_page_url);
+                const books = response.data;
+                console.log(response);
+                this.books = books.data;
+
+                this.current_page = books.current_page;
+                this.prev_page_url = books.prev_page_url;
+                this.next_page_url = books.next_page_url;
+
+            }catch(error){
+                this.message = error;
+            }
         },
 
         //ログアウト
@@ -291,17 +279,61 @@ export default {
             this.message = '';
         },
 
-        //新規投稿キャンセル
-        addCancel(){
-            this.addFlg = false;
-            this.isActive= false;
-        },
-
         //コメント閲覧
         async getComment(id){
             try{
                 location.href = '/comment?book_id=' + id;
 
+            }catch(error){
+                this.message = error;
+            }
+        },
+
+        //検索
+        async searchBook(){
+            try{
+                const response = await axios.post('api/books/search',{
+                    search: this.search
+                });
+
+                const books = response.data;
+                console.log(response);
+                this.books = books.data;
+                
+                this.searchFlg = true;
+                this.current_page = 1;
+                this.prev_page_url = '';
+                this.next_page_url = '';
+
+                this.message = '検索結果' + books.result_count + '件';
+                
+            }catch(error){
+                this.message = error;
+            }
+        },
+
+        //リセット
+        reset(){
+            this.isActive= false;
+            this.searchFlg = false;
+            this.message = '';
+            this.search = '';
+
+            this.addFlg = false;
+            this.title = '';
+            this.category = '';
+
+            this.editFlg = false;
+            this.updateTitle = '';
+            this.updateCategory = '';
+            this.updateId = '';
+        },
+
+        //一覧に戻る
+        async returnIndex(){
+            try{
+                this.reset();
+                location.href = '/index';
             }catch(error){
                 this.message = error;
             }

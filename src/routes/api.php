@@ -39,6 +39,8 @@ Route::get('/books','BookController@index');
 Route::get('/book/{id}','BookController@show');
 Route::delete('/books/{id}','BookController@destroy');
 
+Route::post('/books/search','BookController@result');
+
 //ログイン・ユーザー登録
 Route::post('/register','AuthController@register');
 Route::post('/login','AuthController@login');

@@ -54,7 +54,6 @@
                     <tr v-for="comment in comments" :key="comment.id">
                         <td>{{ comment.pivot.comment }}</td>
                         <td>{{ comment.name }}</td>
-                        <!-- <td>{{ comment.pivot.id }}</td> -->
                         <td>
                             <div class="btn-toolbar" v-if="comment.pivot.user_id == user_id">
                                 <button @click="deleteComment(comment.pivot.id)" class="btn btn-danger" id="delete" :disabled="isActive">削除</button>

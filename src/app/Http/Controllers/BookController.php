@@ -130,4 +130,41 @@ class BookController extends Controller
             throw $e;
         }
     }
+
+    //検索
+    public function result(Request $request){
+        $result_books = [];
+
+        $search = $request->input('search');
+        $query = Book::query();
+    
+        if (!empty($search)) {
+            $query->where('title', 'LIKE', "%{$search}%")
+            ->orWhere('category', 'LIKE', "%{$search}%");
+        }
+    
+        $books = $query->get();
+
+        $result_count = $books -> count();
+
+        for($i = 0 ; $i < $result_count ; $i ++){
+
+            $book_id = $books[$i]->id;
+            $user_id = $books[$i]->user_id;
+
+            $book = Book::find($book_id);
+            $comments_count = $book -> users() -> count();
+            $books[$i]['comments_count'] = $comments_count;
+
+            $user = User::find($user_id);
+            $user_name = $user -> name;
+            $books[$i]['user_name'] = $user_name;
+
+        };
+
+        $result_books['data'] = $books;
+        $result_books['result_count'] = $result_count;
+
+        return $result_books;
+    }
 }
