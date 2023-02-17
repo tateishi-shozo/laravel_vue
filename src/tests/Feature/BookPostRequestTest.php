@@ -37,23 +37,18 @@ class BookPostRequestTest extends TestCase
     {
         return [
             'OK' => [
-                ['title', 'category', 'read_flg'],
-                ['タイトル', '文芸', '0',],
+                ['title', 'category'],
+                ['タイトル', '文芸'],
                 true
             ],
             'タイトルNG' => [
-                ['title', 'category', 'read_flg'],
-                ['', '文芸', '0',],
+                ['title', 'category'],
+                ['', '文芸'],
                 false
             ],
             'カテゴリーNG' => [
-                ['title', 'category', 'read_flg'],
-                ['タイトル', '', '0',],
-                false
-            ],
-            'reaf_flgNG' => [
-                ['title', 'category', 'read_flg'],
-                ['タイトル', 'カテゴリー', '',],
+                ['title', 'category'],
+                ['タイトル', ''],
                 false
             ]
         ];

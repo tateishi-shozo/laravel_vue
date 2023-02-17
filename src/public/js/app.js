@@ -23339,6 +23339,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   book_id: _this3.book_id,
                   user_id: _this3.user_id,
                   comment: _this3.comment
+                }, {
+                  headers: {
+                    Authorization: _this3.token
+                  }
                 });
 
               case 3:
@@ -23379,7 +23383,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.comment_id = comment_id;
                 console.log(comment_id);
                 _context4.next = 5;
-                return axios["delete"]('api/book/comment/' + _this4.comment_id);
+                return axios["delete"]('api/book/comment/' + _this4.comment_id, {
+                  headers: {
+                    Authorization: _this4.token
+                  }
+                });
 
               case 5:
                 _this4.getComments(_this4.book_id);

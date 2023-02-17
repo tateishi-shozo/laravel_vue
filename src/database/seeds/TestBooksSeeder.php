@@ -14,7 +14,6 @@ class TestBooksSeeder extends Seeder
         DB::table('books')->insert([
             'title' => 'テスト用',
             'category' => '文芸',
-            'read_flg' => 0 
         ]);
     }
 }

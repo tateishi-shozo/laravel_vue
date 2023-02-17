@@ -131,6 +131,10 @@ export default {
                     book_id: this.book_id,
                     user_id: this.user_id,
                     comment: this.comment
+                    },{
+                    headers: {
+                        Authorization: this.token
+                    }
                     });
 
                 this.getComments(this.book_id);
@@ -149,7 +153,11 @@ export default {
                 this.comment_id = comment_id;
                 console.log(comment_id);
 
-                await axios.delete('api/book/comment/' + this.comment_id);
+                await axios.delete('api/book/comment/' + this.comment_id,{
+                    headers: {
+                        Authorization: this.token
+                    }
+                    });
 
                 this.getComments(this.book_id);
                 
