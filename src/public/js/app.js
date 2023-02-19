@@ -23249,7 +23249,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getComments(this.book_id);
   },
   methods: {
-    //登録した本の一覧表示
+    //１つの本の表示
     getBook: function getBook(book_id) {
       var _this = this;
 
@@ -23832,14 +23832,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.addForm();
     }),
     "class": "btn btn-primary",
-    disabled: $data.isActive
+    disabled: $data.isActive,
+    id: "addform"
   }, "新規投稿", 8
   /* PROPS */
   , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.logout();
     }),
-    "class": "btn btn-primary"
+    "class": "btn btn-primary",
+    id: "logout"
   }, "ログアウト")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.loginLink();
@@ -23922,12 +23924,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[13] || (_cache[13] = function ($event) {
       return $options.prevPage();
     }),
-    "class": "btn"
+    "class": "btn",
+    id: "pre"
   }, "<<前へ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), this.next_page_url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[14] || (_cache[14] = function ($event) {
       return $options.nextPage();
     }),
-    "class": "btn"
+    "class": "btn",
+    id: "next"
   }, "次へ>>")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), this.searchFlg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[15] || (_cache[15] = function ($event) {
       return $options.returnIndex();
@@ -23949,7 +23953,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: function onClick($event) {
         return $options.getComment(book.id);
-      }
+      },
+      id: "comment"
     }, "コメント(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.comments_count) + ")", 9
     /* TEXT, PROPS */
     , _hoisted_29)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [book.user_id == $data.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -24101,14 +24106,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.addForm();
     }),
     "class": "btn btn-primary",
-    disabled: $data.isActive
-  }, "コメントする", 8
+    disabled: $data.isActive,
+    id: "addform"
+  }, "コメント", 8
   /* PROPS */
   , _hoisted_6)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, _hoisted_9)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.returnIndex();
     }),
-    "class": "btn btn-primary"
+    "class": "btn btn-primary",
+    id: "return"
   }, "戻る")])]), $data.addFlg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "textarea",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
@@ -24123,7 +24130,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "class": "btn btn-primary",
     id: "add"
-  }, "投稿する"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "投稿"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.addCancel();
     }),
@@ -24260,7 +24267,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-link",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.indexLink();
-    })
+    }),
+    id: "indexlink"
   }, "ログインせずに利用する")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "email",
     type: "email",
@@ -24303,12 +24311,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-primary",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.login();
-    })
+    }),
+    id: "login"
   }, "ログイン"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "btn btn-link",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.registerLink();
-    })
+    }),
+    id: "registerlink"
   }, "新規登録の方はこちら")])])])])])])]);
 }
 
@@ -24427,7 +24437,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-link",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.indexLink();
-    })
+    }),
+    id: "indexlink"
   }, "ログインせずに利用する")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "name",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -24495,12 +24506,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-primary",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.register();
-    })
+    }),
+    id: "register"
   }, "登録"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "btn btn-link",
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.loginLink();
-    })
+    }),
+    id: "loginlink"
   }, "ログインへ戻る")])])])])])])]);
 }
 
@@ -38753,7 +38766,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".login[data-v-4d2414bf] {\n  margin-top: 10px;\n}\n.form-group[data-v-4d2414bf] {\n  margin-top: 10px;\n}\n.card[data-v-4d2414bf] {\n  margin: 10px 0;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".login[data-v-4d2414bf] {\n  margin-top: 10px;\n}\n.form-group[data-v-4d2414bf] {\n  margin-top: 10px;\n}\n.card[data-v-4d2414bf] {\n  margin: 30px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38777,7 +38790,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".form-group[data-v-51f045bf] {\n  margin-top: 10px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".form-group[data-v-51f045bf] {\n  margin-top: 10px;\n}\n.card[data-v-51f045bf] {\n  margin: 30px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -4,19 +4,19 @@
             <h2 class="navbar-brand">MYライブラリー</h2>
             <div class="logout" v-if="token !== null">
                 <h4 class="user_name navbar-brand">{{ user_name }}さん</h4>
-                <button @click="addForm()" class="btn btn-primary" :disabled="isActive">コメントする</button>
+                <button @click="addForm()" class="btn btn-primary" :disabled="isActive" id="addform">コメント</button>
             </div>
             <div class="login" v-else>
                 <h4 class="user_name navbar-brand">ゲストさん</h4>
             </div>
             <div class="return">
-                <button @click="returnIndex()" class="btn btn-primary">戻る</button>
+                <button @click="returnIndex()" class="btn btn-primary" id="return">戻る</button>
             </div>
         </div>
         <div class="input-form" v-if="addFlg">
             <h3>コメント</h3>
             <input type="textarea" v-model="comment" id="comment">
-            <button @click="addComment()" class="btn btn-primary" id="add">投稿する</button>
+            <button @click="addComment()" class="btn btn-primary" id="add">投稿</button>
             <button @click="addCancel()" class="btn btn-secondary" id="cancel">キャンセル</button>
         </div>
         <div class="message">
@@ -98,7 +98,7 @@ export default {
     },
 
     methods: {
-        //登録した本の一覧表示
+        //１つの本の表示
         async getBook(book_id){
             try{
                 const response = await axios.get('api/book/' + book_id);

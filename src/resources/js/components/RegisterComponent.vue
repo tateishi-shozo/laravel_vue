@@ -2,7 +2,7 @@
 <div class="register-form">
     <div class="navbar navbar-light navbar-dark bg-dark">
         <h2 class="navbar-brand">MYライブラリー</h2>
-        <a class="btn btn-link" @click="indexLink()">ログインせずに利用する</a>
+        <a class="btn btn-link" @click="indexLink()" id="indexlink">ログインせずに利用する</a>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -45,9 +45,9 @@
                             {{errorPassword}}
                         </div>
                         <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary" @click="register()">登録</button>
+                            <button type="submit" class="btn btn-primary" @click="register()" id="register">登録</button>
 
-                            <a class="btn btn-link" @click="loginLink()">ログインへ戻る</a>
+                            <a class="btn btn-link" @click="loginLink()" id="loginlink">ログインへ戻る</a>
                         </div>
                     </div>
                 </div>
@@ -112,5 +112,8 @@
 <style scoped lang="scss">
 .form-group{
     margin-top:10px;
+}
+.card{
+    margin: 30px;
 }
 </style>

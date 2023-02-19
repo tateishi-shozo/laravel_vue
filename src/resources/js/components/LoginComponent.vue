@@ -2,7 +2,7 @@
 <div class="login-form">
     <div class="navbar navbar-light navbar-dark bg-dark">
         <h2 class="navbar-brand">MYライブラリー</h2>
-        <a class="btn btn-link" @click="indexLink()">ログインせずに利用する</a>
+        <a class="btn btn-link" @click="indexLink()" id="indexlink">ログインせずに利用する</a>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -34,9 +34,8 @@
                                 {{errorPassword}}
                             </div>
                             <div class="col-md-8 offset-md-4 login">
-                                <button class="btn btn-primary" @click="login()">ログイン</button>
- 
-                                <a class="btn btn-link" @click="registerLink()">新規登録の方はこちら</a>
+                                <button class="btn btn-primary" @click="login()" id="login">ログイン</button>
+                                <a class="btn btn-link" @click="registerLink()" id="registerlink">新規登録の方はこちら</a>
                             </div>
                         </div>
                 </div>
@@ -106,6 +105,6 @@
     margin-top:10px;
 }
 .card{
-    margin:10px 0;
+    margin: 30px;
 }
 </style>

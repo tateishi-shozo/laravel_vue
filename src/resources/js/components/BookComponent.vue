@@ -8,8 +8,8 @@
             </div>
             <div class="logout" v-if="token !== null">
                 <h4 class="user_name navbar-brand">{{ user_name }}さん</h4>
-                <button @click="addForm()" class="btn btn-primary" :disabled="isActive">新規投稿</button>
-                <button @click="logout()" class="btn btn-primary">ログアウト</button>
+                <button @click="addForm()" class="btn btn-primary" :disabled="isActive" id="addform">新規投稿</button>
+                <button @click="logout()" class="btn btn-primary" id="logout">ログアウト</button>
             </div>
             <div class="login" v-else>
                 <h4 class="user_name navbar-brand">ゲストさん</h4>
@@ -41,10 +41,10 @@
         </div>
         <div class="btn-toolbar">
             <div class="prev-button" v-if="this.prev_page_url">
-                <button @click="prevPage()" class="btn">&lt;&lt;前へ</button>
+                <button @click="prevPage()" class="btn" id="pre">&lt;&lt;前へ</button>
             </div>
             <div class="next-button" v-if="this.next_page_url">
-                <button @click="nextPage()" class="btn">次へ&gt;&gt;</button>
+                <button @click="nextPage()" class="btn" id="next">次へ&gt;&gt;</button>
             </div>
             <div class="returnIndex-button" v-if="this.searchFlg">
                 <button @click="returnIndex()" class="btn">&lt;&lt;一覧に戻る</button>
@@ -69,7 +69,7 @@
                         <td>{{ book.category }}</td>
                         <td>{{ book.user_name }}</td>
                         <td>{{ book.updated_at }}</td>
-                        <td><button @click="getComment(book.id)">コメント({{ book.comments_count }})</button></td>
+                        <td><button @click="getComment(book.id)" id="comment">コメント({{ book.comments_count }})</button></td>
                         <td>
                             <div class="btn-toolbar" v-if="book.user_id == user_id">
                                 <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit" :disabled="isActive">編集</button>
