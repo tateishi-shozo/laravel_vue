@@ -11,12 +11,10 @@ import CommentComponent from './components/CommentComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
 
-import axios from 'axios';
-import './bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@babel/polyfill';
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
