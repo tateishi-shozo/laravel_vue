@@ -69,7 +69,7 @@
                         <td>{{ book.category }}</td>
                         <td>{{ book.user_name }}</td>
                         <td>{{ book.updated_at }}</td>
-                        <td><button @click="getComment(book.id)" id="comment">コメント({{ book.comments_count }})</button></td>
+                        <td><button @click="getComment(book.id)" class="btn btn-link" id="comment">コメント({{ book.comments_count }})</button></td>
                         <td>
                             <div class="btn-toolbar" v-if="book.user_id == user_id">
                                 <button @click="updateForm(book.id,book.title,book.category)" class="btn btn-primary" id="edit" :disabled="isActive">編集</button>

@@ -23954,6 +23954,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.getComment(book.id);
       },
+      "class": "btn btn-link",
       id: "comment"
     }, "コメント(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.comments_count) + ")", 9
     /* TEXT, PROPS */
