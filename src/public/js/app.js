@@ -23335,7 +23335,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return axios.post('api/book/comment/', {
+                return axios.post('api/book/comment', {
                   book_id: _this3.book_id,
                   user_id: _this3.user_id,
                   comment: _this3.comment

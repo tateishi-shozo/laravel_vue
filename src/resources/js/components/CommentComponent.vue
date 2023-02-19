@@ -127,7 +127,7 @@ export default {
         //コメントの新規登録
         async addComment() {
             try{
-                await axios.post('api/book/comment/',{
+                await axios.post('api/book/comment',{
                     book_id: this.book_id,
                     user_id: this.user_id,
                     comment: this.comment
