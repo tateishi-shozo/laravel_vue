@@ -23593,7 +23593,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response, token;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -23608,16 +23608,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
-                console.log(response.data.token_type);
-
-                if (response.status = 200) {
-                  token = response.data.token_type + ' ' + response.data.access_token;
-                  console.log(token);
-                  localStorage.setItem('Authorization', token);
-                  alert('登録が完了しました!');
-                  location.href = '/login';
-                }
-
+                alert('登録が完了しました!');
+                location.href = '/login';
                 _context.next = 17;
                 break;
 

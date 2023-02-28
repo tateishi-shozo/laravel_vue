@@ -78,14 +78,10 @@
                     email: this.email,
                     password: this.password,
                 });
-                    console.log(response.data.token_type);
-                    if(response.status = 200){
-                        const token = response.data.token_type + ' ' + response.data.access_token;
-                        console.log(token);
-                        localStorage.setItem('Authorization', token);
-                        alert('登録が完了しました!');
-                        location.href = '/login';
-                    }
+
+                alert('登録が完了しました!');
+                location.href = '/login';
+                
                 }catch(error){
                     console.log(error.response);
                     this.errorNames ='';
